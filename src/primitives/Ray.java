@@ -1,7 +1,7 @@
 package primitives;
 
 import java.util.Objects;
-
+import java.lang.Math;
 public class Ray {
     private  Point3D point;
     private Vector vector;
@@ -13,7 +13,17 @@ public class Ray {
      */
     public Ray(Point3D point, Vector vector) {
         this.point = point;
+       Coordinate x =vector.get_head().get_x();
+       Coordinate y =vector.get_head().get_y();
+       Coordinate z =vector.get_head().get_z();
+       //the size of the vector
+       double S=(x.get()*x.get()+y.get()*y.get()+z.get()*z.get());
+
+      // S=Math.sqrt(S);
+
+        if(S==1)
         this.vector = vector;
+        else throw new IllegalArgumentException (  "the vector must be with size =1");
     }
 
     /**
@@ -57,5 +67,6 @@ public class Ray {
                 "point=" + point +
                 ", vector=" + vector +
                 '}';
+
     }
 }

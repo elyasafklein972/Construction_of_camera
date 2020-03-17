@@ -1,5 +1,9 @@
 package primitives;
 
+import com.sun.deploy.security.ruleset.ExceptionRule;
+import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
+import com.sun.xml.internal.ws.api.model.ExceptionType;
+
 import java.util.Objects;
 
 public class Vector {
@@ -13,8 +17,15 @@ public class Vector {
      */
 
     public Vector(Point3D _head) {
-        this._head = _head;
-    }
+        Point3D Zero=new Point3D(new Coordinate(0.0),new Coordinate(0.0),new Coordinate(0.0));
+
+           if (_head != Zero)
+               this._head = _head;
+
+           else throw new IllegalArgumentException (  "head cannot be the zero vector");
+
+
+       }
 
     /**
      * get Fun return _head
@@ -56,5 +67,12 @@ public class Vector {
 
     public Vector crossProduct(Vector edge2) {
         return Vector.ZERO;
+    }
+
+    @Override
+    public String toString() {
+        return "Vector{" +
+                "_head=" + _head +
+                '}';
     }
 }

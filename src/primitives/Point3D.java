@@ -55,4 +55,13 @@ public class Point3D {
     public Vector subtract(Point3D vertex) {
         return Vector.ZERO;
     }
+
+    @Override
+    public String toString() {
+        return "Point3D{" +
+                "_x=" + _x +
+                ", _y=" + _y +
+                ", _z=" + _z +
+                '}';
+    }
 }
