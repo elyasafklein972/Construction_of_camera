@@ -53,7 +53,19 @@ public class Point3D {
     }
 
     public Vector subtract(Point3D vertex) {
-        return Vector.ZERO;
+       if (this.equals(vertex)==true)
+           return Vector.ZERO;
+       else {
+           double dX=(this._x.get()-vertex._x.get());
+           double dY=(this._y.get()-vertex._y.get());
+           double dZ=(this._z.get()-vertex._z.get());
+
+           return new Vector(new Point3D( new Coordinate(dX),new Coordinate(dY),new Coordinate(dZ)));
+
+       }
+
+
+        return
     }
 
     @Override
