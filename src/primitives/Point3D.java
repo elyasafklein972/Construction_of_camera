@@ -82,15 +82,16 @@ public class Point3D {
      * @param vec
      * @return
      */
-    public Point3D add(Vector vec) {
 
-
-           double dX=(this._x.get()-vec.get_head()._x.get() );
-           double dY=(this._y.get()-vec.get_head()._y.get()  );
-           double dZ=(this._z.get()-vec.get_head()._z.get()  );
-
-           return new Point3D(new Coordinate(dX),new Coordinate(dY),new Coordinate(dZ));
-
+        public Vector subtract (Vector vertex) {
+            if (this.equals(vertex.get_head()) == true)
+                return Vector.ZERO;
+            else {
+                double dX = (this._x.get() - vertex.get_head()._x.get());
+                double dY = (this._y.get() - vertex.get_head()._y.get());
+                double dZ = (this._z.get() - vertex.get_head()._z.get());
+                return new Vector(new Point3D(new Coordinate(dX), new Coordinate(dY), new Coordinate(dZ)));
+            }
 
 
     }
@@ -139,17 +140,15 @@ public class Point3D {
      * @param vertex
      * @return
      */
-    public Vector subtract (Vector vertex) {
-        if (this.equals(vertex.get_head()) == true)
-            return Vector.ZERO;
-        else {
-            double dX = (this._x.get() + vertex.get_head()._x.get());
-            double dY = (this._y.get() + vertex.get_head()._y.get());
-            double dZ = (this._z.get() + vertex.get_head()._z.get());
+    public Point3D add(Vector vec) {
 
-            return new Vector(new Point3D(new Coordinate(dX), new Coordinate(dY), new Coordinate(dZ)));
+            double dX = (this._x.get() + vec.get_head()._x.get());
+            double dY = (this._y.get() + vec.get_head()._y.get());
+            double dZ = (this._z.get() + vec.get_head()._z.get());
 
-        }
+                return new Point3D(new Coordinate(dX),new Coordinate(dY),new Coordinate(dZ));
+
+
     }
 
     /**
