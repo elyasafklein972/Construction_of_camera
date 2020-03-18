@@ -66,8 +66,8 @@ public Vector(Vector _head)
 public Vector scale(double num){
     return new Vector(this._head.get_x().get()+num,this._head.get_y().get()+num,this._head.get_z().get()+num);
 }
-public double dotProduct(Vector other){
-        double sizeA=this._head.
+public double dotProduct(Vector other) {
+    double sizeA = this._head
 }
 
 
