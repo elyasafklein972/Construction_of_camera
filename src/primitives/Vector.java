@@ -13,9 +13,13 @@ public class Vector {
 
     /**
      * Constractor
+     * • Builders receiving:
+     * a) three coordinates,
+     * b) three double-digit numbers,
+     * c) a point,
+     * d) a vector
      * @param _head
      */
-
     public Vector(Point3D _head) {
         Point3D Zero=new Point3D(new Coordinate(0.0),new Coordinate(0.0),new Coordinate(0.0));
 
@@ -26,6 +30,47 @@ public class Vector {
 
 
        }
+public Vector (Coordinate _x,Coordinate _y,Coordinate _z){
+        Point3D _head =new Point3D(new Coordinate(_x),new Coordinate(_y),new Coordinate(_z));
+    Point3D Zero=new Point3D(new Coordinate(0.0),new Coordinate(0.0),new Coordinate(0.0));
+
+    if (_head != Zero)
+        this._head = _head;
+
+    else throw new IllegalArgumentException (  "head cannot be the zero vector");
+
+
+}
+
+public Vector(double _x,double _y,double _z){
+        Point3D _head=new Point3D(_x,_y,_z);
+    Point3D Zero=new Point3D(new Coordinate(0.0),new Coordinate(0.0),new Coordinate(0.0));
+
+    if (_head != Zero)
+        this._head = _head;
+
+    else throw new IllegalArgumentException (  "head cannot be the zero vector");
+
+}
+public Vector(Vector _head)
+{
+    Vector v2=new Vector(_head.get_head().get_x(),_head.get_head().get_y(),_head.get_head().get_z());
+    this._head=v2._head;
+}
+    public Vector subtract(Vector vec){
+        return new Vector(this._head.get_x().get()-vec._head.get_x().get(),this._head.get_y().get()-vec._head.get_y().get(),this._head.get_z().get()-vec._head.get_z().get());
+    }
+    public Vector add(Vector vec){
+        return new Vector(this._head.get_x().get()+vec._head.get_x().get(),this._head.get_y().get()+vec._head.get_y().get(),this._head.get_z().get()+vec._head.get_z().get());
+    }
+public Vector scale(double num){
+    return new Vector(this._head.get_x().get()+num,this._head.get_y().get()+num,this._head.get_z().get()+num);
+}
+public double dotProduct(Vector other){
+        double sizeA=this._head.
+}
+
+
 
     /**
      * get Fun return _head
