@@ -58,19 +58,51 @@ public Vector(Vector _head)
     this._head=v2._head;
 }
     public Vector subtract(Vector vec){
-        return new Vector(this._head.get_x().get()-vec._head.get_x().get(),this._head.get_y().get()-vec._head.get_y().get(),this._head.get_z().get()-vec._head.get_z().get());
+        return new Vector(
+                this._head.get_x().get()-vec._head.get_x().get(),
+                this._head.get_y().get()-vec._head.get_y().get(),
+                this._head.get_z().get()-vec._head.get_z().get());
     }
     public Vector add(Vector vec){
-        return new Vector(this._head.get_x().get()+vec._head.get_x().get(),this._head.get_y().get()+vec._head.get_y().get(),this._head.get_z().get()+vec._head.get_z().get());
+        return new Vector(
+                this._head.get_x().get()+vec._head.get_x().get(),
+                this._head.get_y().get()+vec._head.get_y().get(),
+                this._head.get_z().get()+vec._head.get_z().get());
     }
 public Vector scale(double num){
-    return new Vector(this._head.get_x().get()+num,this._head.get_y().get()+num,this._head.get_z().get()+num);
+    return new Vector(
+            this._head.get_x().get()+num,
+            this._head.get_y().get()+num,
+            this._head.get_z().get()+num);
 }
+
 public double dotProduct(Vector other) {
-    double sizeA = this._head
+    return (
+                  _head.get_x().get()*other._head.get_x().get()+
+                  _head.get_y().get()*other._head.get_y().get()+
+                  _head.get_z().get()*other._head.get_z().get());
+
+
 }
+public Vector crossProduct(Vector other){
+        return new Vector(new Point3D(  new Coordinate(this._head.get_y().get()*other._head.get_z().get()-this._head.get_z().get()*other._head.get_y().get()),
+                                        new Coordinate(this._head.get_z().get()*other._head.get_x().get()-this._head.get_x().get()*other._head.get_z().get()),
+                                         new Coordinate(this._head.get_x().get()*other._head.get_y().get()-this._head.get_y().get()*other._head.get_x().get())));
 
 
+}
+public double lengthSquared()
+    {
+        return (this._head.get_x().get()*this._head.get_x().get()+
+                this._head.get_y().get()*this._head.get_y().get()+
+                this._head.get_z().get()*this._head.get_z().get());
+    }
+    public double length()
+    {
+        return Math.sqrt(this._head.get_x().get()*this._head.get_x().get()+
+                this._head.get_y().get()*this._head.get_y().get()+
+                this._head.get_z().get()*this._head.get_z().get());
+    }
 
     /**
      * get Fun return _head
@@ -88,9 +120,7 @@ public double dotProduct(Vector other) {
         this._head = _head;
     }
 
-    public double dotProduct(Vector n) {
-        return 0.0;
-    }
+
 
     /**
      * override equal fun
@@ -110,9 +140,7 @@ public double dotProduct(Vector other) {
         return Objects.hash(_head);
     }
 
-    public Vector crossProduct(Vector edge2) {
-        return Vector.ZERO;
-    }
+
 
     @Override
     public String toString() {
