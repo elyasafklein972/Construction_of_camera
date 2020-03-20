@@ -30,26 +30,27 @@ public class Vector {
 
 
        }
+       public  Vector(Point3D p1,Point3D p2){
+        this._head=p1.subtract(p2)._head;
+       }
 public Vector (Coordinate _x,Coordinate _y,Coordinate _z){
         Point3D _head =new Point3D(new Coordinate(_x),new Coordinate(_y),new Coordinate(_z));
-    Point3D Zero=new Point3D(new Coordinate(0.0),new Coordinate(0.0),new Coordinate(0.0));
+  //  Point3D Zero=new Point3D(new Coordinate(0.0),new Coordinate(0.0),new Coordinate(0.0));
 
-    if (_head != Zero)
-        this._head = _head;
+       if (_head.get_x().get() == 0.0 &&_head.get_y().get() == 0.0 &&_head.get_x().get() == 0.0)
+        throw new IllegalArgumentException (  "head cannot be the zero vector");
 
-    else throw new IllegalArgumentException (  "head cannot be the zero vector");
-
+    else
+    this._head = _head;
 
 }
 
 public Vector(double _x,double _y,double _z){
-        Point3D _head=new Point3D(_x,_y,_z);
-    Point3D Zero=new Point3D(new Coordinate(0.0),new Coordinate(0.0),new Coordinate(0.0));
 
-    if (_head != Zero)
-        this._head = _head;
-
-    else throw new IllegalArgumentException (  "head cannot be the zero vector");
+    if (_x == 0.0 &&_y == 0.0 &&_z == 0.0)
+        throw new IllegalArgumentException (  "head cannot be the zero vector");
+    this._head=new Point3D(_x,_y,_z);
+//    else throw new IllegalArgumentException (  "head cannot be the zero vector");
 
 }
 public Vector(Vector _head)
@@ -71,12 +72,14 @@ public Vector(Vector _head)
     }
 public Vector scale(double num){
     return new Vector(
-            this._head.get_x().get()+num,
-            this._head.get_y().get()+num,
-            this._head.get_z().get()+num);
+            this._head.get_x().get()*num,
+            this._head.get_y().get()*num,
+            this._head.get_z().get()*num);
 }
 
 public double dotProduct(Vector other) {
+
+
     return (
                   _head.get_x().get()*other._head.get_x().get()+
                   _head.get_y().get()*other._head.get_y().get()+
@@ -85,6 +88,14 @@ public double dotProduct(Vector other) {
 
 }
 public Vector crossProduct(Vector other){
+    double equalx =(this._head.get_x().get()/other._head.get_x().get());
+    double equaly =(this._head.get_y().get()/other._head.get_y().get());
+    double equalz =(this._head.get_z().get()/other._head.get_z().get());
+
+    if(equalx == equaly && equalz == equaly)
+        throw new IllegalArgumentException("Two vectors are parallel or same");
+
+    else
         return new Vector(new Point3D(  new Coordinate(this._head.get_y().get()*other._head.get_z().get()-this._head.get_z().get()*other._head.get_y().get()),
                                         new Coordinate(this._head.get_z().get()*other._head.get_x().get()-this._head.get_x().get()*other._head.get_z().get()),
                                          new Coordinate(this._head.get_x().get()*other._head.get_y().get()-this._head.get_y().get()*other._head.get_x().get())));
@@ -139,6 +150,49 @@ public double lengthSquared()
     public int hashCode() {
         return Objects.hash(_head);
     }
+    /**
+     * @return the same Vector after normalisation
+     * @throws ArithmeticException if length = 0
+     */
+    public Vector normalize() {
+
+        double x = this._head.get_x().get();
+        double y = this._head.get_y().get();
+        double z = this._head.get_z().get();
+
+
+        double length = this.length();
+
+        if (length == 0)
+            throw new ArithmeticException("divide by Zero");
+        Vector normal = new Vector(new Point3D(new Coordinate(x / length),new Coordinate(y / length),new Coordinate(z / length)));
+        this._head=normal._head;
+
+        return this;
+
+
+
+
+}
+    /**
+     * @return the same Vector after normalisation
+     * @throws ArithmeticException if length = 0
+     */
+    public Vector normalized() {
+
+        double x = this._head.get_x().get();
+        double y = this._head.get_y().get();
+        double z = this._head.get_z().get();
+
+        double length = this.length();
+
+        if (length == 0)
+            throw new ArithmeticException("divide by Zero");
+        Vector normal = new Vector(new Point3D(new Coordinate(x / length),new Coordinate(y / length),new Coordinate(z / length)));
+
+        return normal;
+
+}
 
 
 

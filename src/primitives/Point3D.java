@@ -79,19 +79,17 @@ public class Point3D {
     /**
      * add - Adds a vector to a point -
      * returns a new point
-     * @param vec
+     * @param p2
      * @return
      */
 
-        public Vector subtract (Vector vertex) {
-            if (this.equals(vertex.get_head()) == true)
-                return Vector.ZERO;
-            else {
-                double dX = (this._x.get() - vertex.get_head()._x.get());
-                double dY = (this._y.get() - vertex.get_head()._y.get());
-                double dZ = (this._z.get() - vertex.get_head()._z.get());
+        public Vector subtract (Point3D p2) {
+
+                double dX = (this._x.get() - p2._x.get());
+                double dY = (this._y.get() - p2._y.get());
+                double dZ = (this._z.get() - p2._z.get());
                 return new Vector(new Point3D(new Coordinate(dX), new Coordinate(dY), new Coordinate(dZ)));
-            }
+
 
 
     }
@@ -137,7 +135,7 @@ public class Point3D {
      * subtract - vector subtraction - receives a second
      * point in the parameter, returns a vector from the second point
      * to the point at which the operation is performed
-     * @param vertex
+     * @param vec
      * @return
      */
     public Point3D add(Vector vec) {
