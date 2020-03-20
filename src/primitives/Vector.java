@@ -110,9 +110,7 @@ public double lengthSquared()
     }
     public double length()
     {
-        return Math.sqrt(this._head.get_x().get()*this._head.get_x().get()+
-                this._head.get_y().get()*this._head.get_y().get()+
-                this._head.get_z().get()*this._head.get_z().get());
+        return Math.sqrt(this.lengthSquared());
     }
 
     /**
@@ -156,22 +154,9 @@ public double lengthSquared()
      */
     public Vector normalize() {
 
-        double x = this._head.get_x().get();
-        double y = this._head.get_y().get();
-        double z = this._head.get_z().get();
-
-
-        double length = this.length();
-
-        if (length == 0)
-            throw new ArithmeticException("divide by Zero");
-        Vector normal = new Vector(new Point3D(new Coordinate(x / length),new Coordinate(y / length),new Coordinate(z / length)));
-        this._head=normal._head;
+        this._head=this.normalized()._head;
 
         return this;
-
-
-
 
 }
     /**

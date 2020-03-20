@@ -119,16 +119,10 @@ public class Point3D {
      */
         public double distance(Point3D p2)
         {
-            if (this.equals(p2) == true)
-                return 0.0;
-            else {
-                double dX = (this._x.get() - p2._x.get());
-                double dY = (this._y.get() - p2._y.get());
-                double dZ = (this._z.get() - p2._z.get());
 
-                return Math.sqrt((dX * dX) + (dY * dY) + (dZ * dZ));
+                return Math.sqrt(this.distanceSquared(p2));
 
-            }
+
         }
 
     /**
