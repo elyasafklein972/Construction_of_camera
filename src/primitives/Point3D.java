@@ -4,6 +4,7 @@ public class Point3D {
     private  Coordinate _x;
     private Coordinate _y;
     private Coordinate _z;
+    public  final static Point3D ZERO = new Point3D(new Coordinate(0.0),new Coordinate(0.0),new Coordinate(0.0));
 
     /**
      *  Builders that receive:
