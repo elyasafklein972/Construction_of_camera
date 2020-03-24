@@ -1,9 +1,5 @@
 package primitives;
 
-import com.sun.deploy.security.ruleset.ExceptionRule;
-import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
-import com.sun.xml.internal.ws.api.model.ExceptionType;
-
 import java.util.Objects;
 
 public class Vector {
