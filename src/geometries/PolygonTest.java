@@ -1,7 +1,4 @@
-/**
- *
- */
-package geometries;
+
 
 import static org.junit.Assert.*;
 
