@@ -1,25 +1,27 @@
 package defaultpackage;
 
-import primitives.*;
+import primitives.Point3D;
+import primitives.Vector;
+import primitives.Util;
 import static java.lang.System.out;
-import static primitives.Util.*;
+import static primitives.Util.isZero;
 
 /**
- * Test program for the 1st stage
- *
- * @author Dan Zilberstein
- */
+        * Test program for the 1st stage
+        *
+        * @author Dan Zilberstein
+        */
 public final class Main {
 
     /**
-     * Main program to tests initial functionality of the 1st stage
+            * Main program to tests initial functionality of the 1st stage
      *
-     * @param args irrelevant here
+             * @param args irrelevant here
      */
     public static void main(String[] args) {
 
         try { // test zero vector
-            Vector vector = new Vector(0, 0, 0);
+            new Vector(0, 0, 0);
             out.println("ERROR: zero vector does not throw an exception");
         } catch (Exception e) {}
 
