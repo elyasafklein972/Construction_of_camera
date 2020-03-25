@@ -1,7 +1,7 @@
 package primitives;
 
 public class Point3D {
-    public static final Point3D ZERO = ;
+
     private  Coordinate _x;
     private Coordinate _y;
     private Coordinate _z;

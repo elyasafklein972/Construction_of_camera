@@ -1,6 +1,10 @@
-import primitives.*;
+package defaultpackage;
+
+import primitives.Point3D;
+import primitives.Vector;
+import primitives.Util;
 import static java.lang.System.out;
-import static primitives.Util.*;
+import static primitives.Util.isZero;
 
 /**
  * Test program for the 1st stage
