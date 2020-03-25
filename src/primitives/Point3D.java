@@ -101,7 +101,7 @@ public class Point3D {
      * @return
      */
     public double distanceSquared(Point3D p2) {
-        if (this.equals(p2) == true)
+        if (this.equals(p2))
             return 0.0;
         else {
             double dX = (this._x.get() - p2._x.get());

@@ -60,12 +60,14 @@ public class Vector {
                 this._head.get_y().get()-vec._head.get_y().get(),
                 this._head.get_z().get()-vec._head.get_z().get());
     }
+
     public Vector add(Vector vec){
         return new Vector(
                 this._head.get_x().get()+vec._head.get_x().get(),
                 this._head.get_y().get()+vec._head.get_y().get(),
                 this._head.get_z().get()+vec._head.get_z().get());
     }
+
     public Vector scale(double num){
         return new Vector(
                 this._head.get_x().get()*num,
@@ -104,6 +106,7 @@ public class Vector {
                 this._head.get_y().get()*this._head.get_y().get()+
                 this._head.get_z().get()*this._head.get_z().get());
     }
+
     public double length()
     {
         return Math.sqrt(this.lengthSquared());
