@@ -27,12 +27,21 @@ public class Plane implements Geometry {
 
     @Override
     public Vector getNormal(Point3D p) {
+        if (this._p==p)
         return _normal;
+        else {
+            throw new IllegalArgumentException("not the same Point");
+
+
+
+        }
     }
 
     //because polygon
     public Vector getNormal() {
-        return getNormal(null);
+        return  _normal.normalized();
+
+
     }
 
 }
