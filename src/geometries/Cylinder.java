@@ -1,7 +1,7 @@
 package geometries;
 
-import primitives.Point3D;
-import primitives.Ray;
+import primitives.*;
+import primitives.*;
 import primitives.Vector;
 
 public class Cylinder extends Tube  {
@@ -18,17 +18,23 @@ public class Cylinder extends Tube  {
      */
     @Override
     public Vector getNormal(Point3D point) {
-        //The vector from the point of the cylinder to the given point
-        Vector vector1 = point.subtract(this.get_ray().getPoint());
+        Point3D o = super.get_ray().getPoint();
+        Vector v = super.get_ray().getDirection();
 
-        //We need the projection to multiply the _direction unit vector
-        double projection = vector1.dotProduct(this.get_ray().getDirection());
+        // projection of P-O on the ray:
+        double t;
+        try {
+            t = Util.alignZero(point.subtract(o).dotProduct(v));
+        } catch (IllegalArgumentException e) { // P = O
+            return v;
+        }
 
-        Vector vector2 = this.get_ray().getDirection().scale(projection);
+        // if the point is at a base
+        if (t == 0 ||Util.isZero(_height - t)) // if it's close to 0, we'll get ZERO vector exception
+            return v;
 
-        //This vector is orthogonal to the _direction vector.
-        Vector check = vector1.subtract(vector2);
-        return check.normalize();
+        o = o.add(v.scale(t));
+        return point.subtract(o).normalize();
     }
     public double get_height() {
         return _height;

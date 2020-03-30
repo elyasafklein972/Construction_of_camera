@@ -2,6 +2,9 @@ package primitives;
 
 import java.util.Objects;
 import java.lang.Math;
+
+import static primitives.Util.isZero;
+
 public class Ray {
 
 
@@ -57,6 +60,10 @@ public class Ray {
         public Point3D getPoint() {
             return new Point3D(_point);
         }
+
+    public Point3D getTargetPoint(double length) {
+        return isZero(length ) ? _point : new Point3D(_point).add(_direction.scale(length));
+    }
 
         /**
          * Getter for the direction of the ray that is

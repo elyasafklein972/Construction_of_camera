@@ -1,11 +1,12 @@
 package geometries;
 
-import java.lang.reflect.Array;
-import java.util.List;
-import java.util.Objects;
+import primitives.Point3D;
+import primitives.Ray;
+import primitives.Vector;
 
-import primitives.*;
-import static primitives.Util.*;
+import java.util.List;
+
+import static primitives.Util.isZero;
 
 /**
  * Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
@@ -28,22 +29,26 @@ public class Polygon implements Geometry {
      * path. The polygon must be convex.
      *
      * @param vertices list of vertices according to their order by edge path
-     * @throws IllegalArgumentException in any case of illegal combination of vertices:
+     * @throws IllegalArgumentException in any case of illegal combination of
+     *                                  vertices:
      *                                  <ul>
      *                                  <li>Less than 3 vertices</li>
-     *                                  <li>Consequent vertices are in the same point
-     *                                  <li>The vertices are not in the same plane</li>
-     *                                  <li>The order of vertices is not according to edge path</li>
-     *                                  <li>Three consequent vertices lay in the same line (180&#176; angle between two
+     *                                  <li>Consequent vertices are in the same
+     *                                  point
+     *                                  <li>The vertices are not in the same
+     *                                  plane</li>
+     *                                  <li>The order of vertices is not according
+     *                                  to edge path</li>
+     *                                  <li>Three consequent vertices lay in the
+     *                                  same line (180&#176; angle between two
      *                                  consequent edges)
-     *                                  <li>The polygon is concave (not convex></li>
+     *                                  <li>The polygon is concave (not convex)</li>
      *                                  </ul>
      */
     public Polygon(Point3D... vertices) {
         if (vertices.length < 3)
             throw new IllegalArgumentException("A polygon can't have less than 3 vertices");
-        for (int i=0;i<vertices.length;i++)
-        {_vertices.add(vertices[i]) ;}// = List.of(vertices);
+        _vertices = List.of(vertices);
         // Generate the plane according to the first three vertices and associate the
         // polygon with this plane.
         // The plane holds the invariant normal (orthogonal unit) vector to the polygon
@@ -54,8 +59,8 @@ public class Polygon implements Geometry {
 
         // Subtracting any subsequent points will throw an IllegalArgumentException
         // because of Zero Vector if they are in the same point
-        Vector edge1 = vertices[0].subtract(vertices[vertices.length - 1]);
-        Vector edge2 = vertices[1].subtract(vertices[0]);
+        Vector edge1 = vertices[vertices.length - 1].subtract(vertices[vertices.length - 2]);
+        Vector edge2 = vertices[0].subtract(vertices[vertices.length - 1]);
 
         // Cross Product of any subsequent edges will throw an IllegalArgumentException
         // because of Zero Vector if they connect three vertices that lay in the same
@@ -67,7 +72,7 @@ public class Polygon implements Geometry {
         // the
         // polygon is convex ("kamur" in Hebrew).
         boolean positive = edge1.crossProduct(edge2).dotProduct(n) > 0;
-        for (int i = 2; i < vertices.length; ++i) {
+        for (int i = 1; i < vertices.length; ++i) {
             // Test that the point is in the same plane as calculated originally
             if (!isZero(vertices[i].subtract(vertices[0]).dotProduct(n)))
                 throw new IllegalArgumentException("All vertices of a polygon must lay in the same plane");
@@ -79,27 +84,14 @@ public class Polygon implements Geometry {
         }
     }
 
-    /**
-     * equals fun
-     * @param o
-     * @return
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Polygon polygon = (Polygon) o;
-        return Objects.equals(_vertices, polygon._vertices) &&
-                Objects.equals(_plane, polygon._plane);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(_vertices, _plane);
-    }
-
     @Override
     public Vector getNormal(Point3D point) {
         return _plane.getNormal();
+    }
+
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        //TO DO
+        return null;
     }
 }

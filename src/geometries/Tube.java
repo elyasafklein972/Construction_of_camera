@@ -1,15 +1,21 @@
 package geometries;
 
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Util;
-import primitives.Vector;
+import primitives.*;
+
+import java.util.List;
+
+import static primitives.Util.isZero;
+
+/**
+ * Represents an infinite tube in the 3D space.
+ * That is, the cylinder does not have a length.
+ */
 
 public class Tube extends RadialGeometry {
     /**
      *  represents the direction and the reference point
      */
-    private final Ray _ray;
+    protected final Ray _ray;
 
     /**
      * constructor for a new Cylinder object
@@ -24,16 +30,6 @@ public class Tube extends RadialGeometry {
     }
 
     /**
-     * copy constructor for a tube object to be deep copied
-     *
-     * @param other the source parameter
-     */
-    public Tube(Tube other) {
-        super(other);
-        this._ray = new Ray(other._ray);
-    }
-
-    /**
      *
      * @return ray
      */
@@ -41,23 +37,23 @@ public class Tube extends RadialGeometry {
         return new Ray(_ray);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof Tube))
-            return false;
-        if (this == obj)
-            return true;
-        Tube other = (Tube) obj;
-
-        //the two vectors needs to be in the same direction,
-        //but not necessary to have the same length.
-        try {
-            Vector v = _ray.getDirection().crossProduct(other._ray.getDirection());
-        } catch (IllegalArgumentException ex) {
-            return (Util.isZero(this._radius - other._radius) && _ray.getPoint().equals((_ray.getPoint())));
-        }
-        throw new IllegalArgumentException("direction cross product with parameter.direction == Vector(0,0,0)");
-    }
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (obj == null || !(obj instanceof Tube))
+//            return false;
+//        if (this == obj)
+//            return true;
+//        Tube other = (Tube) obj;
+//
+//        //the two vectors needs to be in the same direction,
+//        //but not necessary to have the same length.
+//        try {
+//            Vector v = _ray.getDirection().crossProduct(other._ray.getDirection());
+//        } catch (IllegalArgumentException ex) {
+//            return (Util.isZero(this._radius - other._radius) && _ray.getPoint().equals((_ray.getPoint())));
+//        }
+//        throw new IllegalArgumentException("direction cross product with parameter.direction == Vector(0,0,0)");
+//    }
 
     @Override
     public String toString() {
@@ -73,15 +69,26 @@ public class Tube extends RadialGeometry {
     @Override
     public Vector getNormal(Point3D point) {
         //The vector from the point of the cylinder to the given point
-        Vector vector1 = point.subtract(_ray.getPoint());
+        Point3D o = _ray.getPoint();
+        Vector v = _ray.getDirection();
+
+        Vector vector1 = point.subtract(o);
 
         //We need the projection to multiply the _direction unit vector
-        double projection = vector1.dotProduct(_ray.getDirection());
-
-        Vector vector2 = _ray.getDirection().scale(projection);
+        double projection = vector1.dotProduct(v);
+        if(!isZero(projection))
+        {
+            // projection of P-O on the ray:
+            o.add(v.scale(projection));
+        }
 
         //This vector is orthogonal to the _direction vector.
-        Vector check = vector1.subtract(vector2);
+        Vector check = point.subtract(o);
         return check.normalize();
+    }
+
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
     }
 }
