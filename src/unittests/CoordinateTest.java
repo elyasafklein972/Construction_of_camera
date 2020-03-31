@@ -18,4 +18,22 @@ public class CoordinateTest {
         assertEquals(c3,new Coordinate(0.0));
     }
 
+    public static class SphereTest {
+
+        @Test
+        public void getCenter() {
+        }
+
+        @Test
+        public void getNormal() {
+        }
+
+        @Test
+        public void get_center() {
+        }
+
+        @Test
+        public void findIntersections() {
+        }
+    }
 }
