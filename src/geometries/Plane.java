@@ -15,6 +15,14 @@ public class Plane implements Geometry {
     Point3D _p;
     primitives.Vector _normal;
 
+    public Point3D get_p() {
+        return _p;
+    }
+
+    public Vector get_normal() {
+        return _normal;
+    }
+
     public Plane(Point3D p1, Point3D p2, Point3D p3) {
         _p = new Point3D(p1);
 

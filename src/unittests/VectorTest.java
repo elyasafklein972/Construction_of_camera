@@ -13,13 +13,19 @@ public class VectorTest {
     public void subtract() {
         Vector v1 = new Vector(1.0, 1.0, 1.0);
         Vector v2 = new Vector(-1.0, -1.0, -1.0);
+        Vector v3 = new Vector(-3.0, -3.0, -3.0);
 
         v1 = v1.subtract(v2);
         assertNotEquals(v1, new Vector(2.0, 2.0, 3.0));
 
         v2 = v2.subtract(v1);
         assertEquals(v2, new Vector(-3.0, -3.0, -3.0));
-
+        try {
+            v2=v2.subtract(v3);
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println("test passed: v2 is zero Vector");
+        }
     }
 
     /**
@@ -29,12 +35,19 @@ public class VectorTest {
     public void add() {
         Vector v1 = new Vector(1.0, 1.0, 1.0);
         Vector v2 = new Vector(-1.0, -1.0, 1.0);
+        Vector v3 = new Vector(0.0, 0.0, -2.0);
 
         v1 = v1.add(v2);
 
         ///assertTrue(v1.equals(new Vector(0.0,0.0,0.0)) == 0);
         assertEquals(v1, new Vector(0.0, 0.0, 2.0));
         assertNotEquals(v1, new Vector(0.0, 2.2, 4.0));
+        try {
+            v1=v1.add(v3);
+        }
+catch (IllegalArgumentException e){
+    System.out.println( "test passed: v1 is zero Vector");
+}
     }
 
     /**
@@ -55,8 +68,12 @@ public class VectorTest {
 
         v1 = v1.scale(-2);
         assertNotEquals(v1, new Vector(-4.0, -4.0, -4.0));
+        try {
+            v1 = v1.scale(0.0);
+        } catch (IllegalArgumentException e) {
+            System.out.println("test passed: v1 is zero Vector");
+        }
     }
-
     /**
      * Test method for Vector.dotProduct()
      */
@@ -87,19 +104,26 @@ public class VectorTest {
         Vector v4 = v2.crossProduct(v1);
 
         assertNotEquals(v3, v4);
+        try {
+            Vector v5 = new Vector(1.0, 1.0, 1.0);
+            Vector v6 = new Vector(1.0, 1.0, 1.0);
+            v5= v5.crossProduct(v6);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("test passed: v5 is zero Vector");
+        }
     }
+        /**
+         * Test method for Vector.lengthSquared()
+         */
+        @Test
+        public void lengthSquared () {
+            Vector v = new Vector(3.5, -5, 10);
 
-    /**
-     * Test method for Vector.lengthSquared()
-     */
-    @Test
-    public void lengthSquared() {
-        Vector v = new Vector(3.5, -5, 10);
+            assertEquals(v.lengthSquared(), (12.25 + 25 + 100), 0.0);
 
-        assertEquals(v.lengthSquared(), (12.25 + 25 + 100), 0.0);
-
-        assertNotEquals(v.lengthSquared(), (12.25 + 25), 0.0);
-    }
+            assertNotEquals(v.lengthSquared(), (12.25 + 25), 0.0);
+        }
 
     /**
      * Test method for Vector.length()
