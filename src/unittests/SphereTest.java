@@ -12,7 +12,7 @@ public class SphereTest {
     public void getCenter() {
         Sphere _s=new Sphere(2,new Point3D(1,1,1));
       assertEquals(_s.getCenter(),new Point3D(1,1,1));
-
+//new
     }
 
     @Test
