@@ -45,8 +45,7 @@ public class Cylinder extends Tube  {
             return "Cylinder{" +
                     "_height="+_height+
                     "_axisRay=" + super.get_ray() +
-                    "_radius="+super.get_radius()+
-                    '}';
+                    "_radius="+super.get_radius()+ '}';
         }
 
     }
