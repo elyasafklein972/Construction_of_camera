@@ -7,6 +7,10 @@ import primitives.Vector;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit tests for primitives.Ray class
+ * @author elyasaf and omer
+ */
 public class RayTest {
     /**
      * Test method for {@link primitives.Ray#Ray(Point3D, Vector)}}.
