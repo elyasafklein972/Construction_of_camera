@@ -46,7 +46,7 @@ public class PlaneTest {
     @Test
     public void findIntersectionsTest() {
         assertEquals("", p1.findIntersections(r1).size(), 1);
-        //assertEquals("",p1.findIntersections(r1).get(0),new Point3D(0,0,0));
+      
         try {
             assertEquals("", p1.findIntersections(r2).size(), 0);
         }
@@ -54,6 +54,16 @@ public class PlaneTest {
        {
            System.out.println("r1 no Intersections p1");
        }
+
+        try {
+            assertEquals("", p1.findIntersections(r3).size(), 0);
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("r3 no Intersections p1");
+        }
+
+
         // checks if the vector is contained in the plane there is no intersections
 
         try {
@@ -63,6 +73,20 @@ public class PlaneTest {
         {
             System.out.println("r3 no Intersections p2");
         }
-        
+        try {
+            assertEquals("", p2.findIntersections(r1).size(), 0);        }
+
+        catch (NullPointerException e)
+        {
+            System.out.println("r1 no Intersections p2");
+        }
+        try {
+            assertEquals("", p2.findIntersections(r2).size(), 0);        }
+
+        catch (NullPointerException e)
+        {
+            System.out.println("r2 no Intersections p2");
+        }
+
     }
 }
