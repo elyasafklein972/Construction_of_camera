@@ -153,31 +153,27 @@ public class Vector {
             */
     public Vector normalize() {
 
-        this._head=this.normalized()._head;
-
-        return this;
-
-    }
-    /*
-            * @return the same Vector after normalisation
-     * @throws ArithmeticException if length = 0
-            */
-    public Vector normalized() {
-
-        double x = this._head.get_x().get();
-        double y = this._head.get_y().get();
-        double z = this._head.get_z().get();
+        double x = this._head.get_x()._coord;
+        double y = this._head.get_y()._coord;
+        double z = this._head.get_z()._coord;
 
         double length = this.length();
 
         if (length == 0)
             throw new ArithmeticException("divide by Zero");
-        Vector normal = new Vector(new Point3D(new Coordinate(x / length),new Coordinate(y / length),new Coordinate(z / length)));
 
-        return normal;
+        this._head.set_x(new Coordinate(x / length));
+        this._head.set_y(new Coordinate(y / length));
+        this._head.set_z(new Coordinate(z / length));
 
+        return this;
     }
 
+    public Vector normalized() {
+        Vector vector = new Vector(this);
+        vector.normalize();
+        return vector;
+    }
 
 
     @Override
