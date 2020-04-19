@@ -61,7 +61,7 @@ public class Ray {
             return new Point3D(_point);
         }
 
-    public Point3D getTargetPoint(double length) {
+    public Point3D getPoint(double length) {
         return isZero(length ) ? _point : new Point3D(_point).add(_direction.scale(length));
     }
 

@@ -46,7 +46,7 @@ public class PlaneTest {
     @Test
     public void findIntersectionsTest() {
         assertEquals("", p1.findIntersections(r1).size(), 1);
-      
+
         try {
             assertEquals("", p1.findIntersections(r2).size(), 0);
         }

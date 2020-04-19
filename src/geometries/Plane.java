@@ -74,7 +74,7 @@ public class Plane implements Geometry {
 
         double t = alignZero(_normal.dotProduct(p0Q) / nv);
 
-        return t <= 0 ? null : List.of(ray.getTargetPoint(t));
+        return t <= 0 ? null : List.of(ray.getPoint(t));
     }
 
 }

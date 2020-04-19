@@ -58,7 +58,7 @@ public class RayTest {
 
 
     /**
-     * Test method for {@link primitives.Ray#getTargetPoint(double)}}.
+     * Test method for {@link primitives.Ray#getPoint(double)}}.
      */
     @Test
     public void getTargetPoint(){
@@ -70,19 +70,19 @@ public class RayTest {
 
 
         ///test when the length is normal double
-        Point3D p=new Point3D( r1.getTargetPoint(1.8));
+        Point3D p=new Point3D( r1.getPoint(1.8));
         assertEquals(p,new Point3D(2,3,4).add(new Vector(0.481070235442364,0.962140470884728,1.443210706327092)));
 
 
         ///test when the length is normal int
-        Point3D p1=new Point3D( r1.getTargetPoint(5));
+        Point3D p1=new Point3D( r1.getPoint(5));
         assertEquals(p1,new Point3D(2,3,4).add(new Vector(1.336306209562122,2.672612419124244,4.008918628686367)));
 
 
         // =============== Boundary Values Tests ==================
 
         ///test when the length is zero if return _point
-        Point3D p2=new Point3D( r1.getTargetPoint(0));
+        Point3D p2=new Point3D( r1.getPoint(0));
         assertEquals(p2,new Point3D(2,3,4));
 
     }
