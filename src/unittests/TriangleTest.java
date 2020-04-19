@@ -66,7 +66,7 @@ public class TriangleTest {
 
         try {
             t1.findIntersections(r3).size();
-        }
+    }
         catch (NullPointerException e){
             System.out.println("r3 no Intersections with t1");
         }
@@ -104,15 +104,5 @@ public class TriangleTest {
         catch (NullPointerException e){
             System.out.println("r4 no Intersections with t2");
         }
-
-
-
-
-
-
     }
-
-
-
-
 }
