@@ -1,5 +1,10 @@
 package defaultpackage;
 
+/**
+ * omer hadad, 315723940, Omer.hadad23@gmail.com
+ * elyasaf klein, 205457872, elyasaf007@gmail.com
+ */
+
 import primitives.Point3D;
 import primitives.Vector;
 import primitives.Util;

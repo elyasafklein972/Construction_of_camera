@@ -171,5 +171,4 @@ public class Tube extends RadialGeometry {
             toReturn.add(new Vector(P.add(V.scale(t1).getHead())).getHead());
             toReturn.add(new Vector(P.add(V.scale(t2).getHead())).getHead());
             return toReturn;
-        }
-    }
+        }*/

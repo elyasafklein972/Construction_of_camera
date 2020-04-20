@@ -90,10 +90,22 @@ public class Point3D {
                 double dY = (this._y.get() - p2._y.get());
                 double dZ = (this._z.get() - p2._z.get());
                 return new Vector(new Point3D(new Coordinate(dX), new Coordinate(dY), new Coordinate(dZ)));
-
-
-
     }
+
+    /**
+     * add - Adds a vector to a point -
+     * returns a new point
+     * @param v
+     * @return
+     */
+    public Point3D subtract(Vector v) {
+        return new Point3D(this._x._coord - v.get_head()._x._coord,
+                this._y._coord - v.get_head()._y._coord,
+                this._z._coord - v.get_head()._z._coord);
+    }
+
+
+
 
     /**
      * distanceSquared - The squeeze between two squares
