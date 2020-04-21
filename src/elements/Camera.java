@@ -10,20 +10,21 @@ private Vector _vUp;
 private Vector _vTo;
 private Vector _vRight;
 
-public Camera(Point3D _p0, Vector _vUp, Vector _vTo) {
-        this._p0 = _p0;
-        this._vUp = _vUp.normalize();
-        this._vTo = _vTo.normalize();
-        try {
-        if (_vUp.dotProduct(_vTo)!=0)
-        throw new IllegalArgumentException("Vector _Up and Vector _To they not vertical");
-        this._vRight = _vTo.crossProduct(_vUp).normalize();
-        }
-        catch (IllegalArgumentException e){
-        System.out.println(e);
-        }
 
-        }
+    public Camera(Point3D _p0, Vector _vTo, Vector _vUp) {
+
+        //if the the vectors are not orthogonal, throw exception.
+        if (_vUp.dotProduct(_vTo) != 0)
+            throw new IllegalArgumentException("the vectors must be orthogonal");
+
+        this._p0 =  new Point3D(_p0);
+
+        this._vTo = new Vector( _vTo.normalized());
+        this._vUp = new Vector(_vUp.normalized());
+
+        _vRight = this._vTo.crossProduct(this._vUp.normalize());
+
+    }
 
 public Point3D get_p0() {
         return _p0;
@@ -41,6 +42,19 @@ public Vector get_vRight() {
         return _vRight;
         }
 
+    // ***************** Operations ******************** //
+    /*************************************************
+     * FUNCTION
+     * constructRayThroughPixel
+     * PARAMETERS
+     * int Nx, int Ny, // Screen size
+     * double x, double y, // Point
+     * double screenDist, double screenWidth, double screenHeight
+     * RETURN VALUE
+     * Ray
+     * MEANING
+     * This function sends ray through pixel into the view plane
+     **************************************************/
 public Ray constructRayThroughPixel (int nX, int nY, int j, int i, double screenDistance, double screenWidth, double screenHeight)
 
 {
