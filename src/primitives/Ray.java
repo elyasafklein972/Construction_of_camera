@@ -24,7 +24,7 @@ public class Ray {
          */
         public Ray(Point3D point, Vector direction) {
             _point = new Point3D(point);
-            _direction = new Vector(direction).normalized();
+            _direction = new Vector(direction).normalize();
         }
 
         /**
@@ -33,7 +33,7 @@ public class Ray {
          */
         public Ray(Ray other) {
             this._point = new Point3D(other._point);
-            this._direction = other._direction.normalized();
+            this._direction = other._direction.normalize();
         }
 
         @Override

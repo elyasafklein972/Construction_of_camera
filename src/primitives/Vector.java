@@ -51,7 +51,7 @@ public class Vector {
     }
     public Vector(Vector _head)
     {
-        Vector v2=new Vector(_head.get_head().get_x(),_head.get_head().get_y(),_head.get_head().get_z());
+        Vector v2=new Vector(_head.get_head().get_x().get(),_head.get_head().get_y().get(),_head.get_head().get_z().get());
         this._head=v2._head;
     }
     public Vector subtract(Vector vec){
