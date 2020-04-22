@@ -160,6 +160,23 @@ public class cameraRayIntersectionsIntegrationTest {
         if (intersections != null)
             assertEquals("wronge intersection",9,count);
     }
+    @Test
+    public void cameraRayPlaneIntegrationTest3(){
+        Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
+        Plane plane = new Plane(new Point3D(0,0,4),new Vector(1,0,0));
+        List<Point3D> intersections=new ArrayList<Point3D>();
+        int count = 0;
 
+
+        for (int i=0;i<3;i++) {
+            for (int j = 0; j < 3; j++) {
+                intersections = plane.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                if (intersections != null)
+                    count+=intersections.size();
+            }
+        }
+        if (intersections != null)
+            assertEquals("wronge intersection",6,count);
+    }
 
 }
