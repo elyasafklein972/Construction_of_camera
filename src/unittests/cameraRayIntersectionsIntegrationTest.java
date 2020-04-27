@@ -215,7 +215,26 @@ public class cameraRayIntersectionsIntegrationTest {
         if (intersections != null)
             assertEquals("wronge intersection",2,count);
     }
-  
+    @Test
+    public void cameraRayTriangleIntegrationTest3(){
+        Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
+        Triangle tri=new Triangle(new Point3D(0,-20,2),new Point3D(1,20,2),new Point3D(-1,20,2));
+        List<Point3D> intersections=new ArrayList<Point3D>();
+        int count = 0;
+
+
+        for (int i=0;i<3;i++) {
+            for (int j = 0; j < 3; j++) {
+                intersections = tri.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                if (intersections != null)
+                    count+=intersections.size();
+            }
+        }
+        if (intersections != null)
+            assertEquals("wronge intersection",3,count);
+    }
+
+
 
 
 
