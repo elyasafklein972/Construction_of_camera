@@ -21,7 +21,11 @@ import static org.junit.Assert.assertEquals;
 
 public class cameraRayIntersectionsIntegrationTest {
 
-
+    /**
+     * camera Ray Sphere Integration Test
+     * 2 integration with view plane and Sphere
+     *
+     */
     @Test
     public void cameraRaySphereIntegrationTest1() {
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
@@ -42,7 +46,11 @@ public class cameraRayIntersectionsIntegrationTest {
     }
 
 
-
+    /**
+     * camera Ray Sphere Integration Test
+     * 18 integration with view plane and Sphere
+     *
+     */
     @Test
     public void cameraRaySphereIntegrationTest2() {
         Camera cam = new Camera(new Point3D(0, 0, -0.5), new Vector(0, 0, 1), new Vector(0, -1, 0));
@@ -63,7 +71,11 @@ public class cameraRayIntersectionsIntegrationTest {
             assertEquals("wronge intersection",18,count);
     }
 
-
+    /**
+     * camera Ray Sphere Integration Test
+     * 10 integration with view plane and Sphere
+     *
+     */
     @Test
     public void cameraRaySphereIntegrationTest3() {
         Camera cam = new Camera(new Point3D(0, 0, -0.5), new Vector(0, 0, 1), new Vector(0, -1, 0));
@@ -83,7 +95,11 @@ public class cameraRayIntersectionsIntegrationTest {
         if (intersections != null)
             assertEquals("wronge intersection",10,count);
     }
-
+    /**
+     * camera Ray Sphere Integration Test
+     * 9 integration with view plane and Sphere
+     *
+     */
     @Test
     public void cameraRaySphereIntegrationTest4() {
         Camera cam = new Camera(new Point3D(2, 2, 2), new Vector(0, 0, 1), new Vector(0, -1, 0));
@@ -104,6 +120,12 @@ public class cameraRayIntersectionsIntegrationTest {
             assertEquals("wronge intersection",9,count);
     }
 
+
+    /**
+     * camera Ray Sphere Integration Test
+     * 0 integration with view plane and Sphere
+     *
+     */
     @Test
     public void cameraRaySphereIntegrationTest5() {
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
@@ -123,7 +145,12 @@ public class cameraRayIntersectionsIntegrationTest {
         if (intersections != null)
             assertEquals("wronge intersection",0,count);
     }
-
+    /**
+     *
+     * camera Ray Plane Integration Test
+     * 9 integration with view plane and plane
+     *
+     */
     @Test
     public void cameraRayPlaneIntegrationTest1(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
@@ -142,7 +169,12 @@ public class cameraRayIntersectionsIntegrationTest {
         if (intersections != null)
             assertEquals("wronge intersection",9,count);
     }
-
+    /**
+     *
+     * camera Ray Plane Integration Test
+     * 9 integration with view plane and plane
+     *
+     */
     @Test
     public void cameraRayPlaneIntegrationTest2(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
@@ -161,6 +193,13 @@ public class cameraRayIntersectionsIntegrationTest {
         if (intersections != null)
             assertEquals("wronge intersection",9,count);
     }
+
+    /**
+     *
+     * camera Ray Plane Integration Test
+     * 6 integration with view plane and plane
+     *
+     */
     @Test
     public void cameraRayPlaneIntegrationTest3(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
@@ -179,6 +218,37 @@ public class cameraRayIntersectionsIntegrationTest {
         if (intersections != null)
             assertEquals("wronge intersection",6,count);
     }
+
+    /**
+     *
+     * camera Ray Plane Integration Test
+     * 0 integration with view plane and plane
+     *
+     */
+    @Test
+    public void cameraRayPlaneIntegrationTest4(){
+        Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
+        Plane plane = new Plane(new Point3D(0,0,-1),new Vector(1,0,0));
+        List<Point3D> intersections=new ArrayList<Point3D>();
+        int count = 0;
+
+
+        for (int i=0;i<3;i++) {
+            for (int j = 0; j < 3; j++) {
+                intersections = plane.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                if (intersections != null)
+                    count+=intersections.size();
+            }
+        }
+        if (intersections != null)
+            assertEquals("wronge intersection",0,count);
+    }
+
+    /**
+     * cameraRay Triangle Integration Test
+     * 1 integration with view plane and triangle
+     *
+     */
     @Test
     public void cameraRayTriangleIntegrationTest1(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
@@ -197,6 +267,12 @@ public class cameraRayIntersectionsIntegrationTest {
         if (intersections != null)
             assertEquals("wronge intersection",1,count);
     }
+
+    /**
+     * cameraRay Triangle Integration Test
+     * 2 integration with view plane and triangle
+     *
+     */
     @Test
     public void cameraRayTriangleIntegrationTest2(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
@@ -215,6 +291,12 @@ public class cameraRayIntersectionsIntegrationTest {
         if (intersections != null)
             assertEquals("wronge intersection",2,count);
     }
+
+    /**
+     * cameraRay Triangle Integration Test
+     * 3 integration with view plane and triangle
+     *
+     */
     @Test
     public void cameraRayTriangleIntegrationTest3(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
@@ -233,6 +315,11 @@ public class cameraRayIntersectionsIntegrationTest {
         if (intersections != null)
             assertEquals("wronge intersection",3,count);
     }
+
+    /**
+     * cameraRay Triangle Integration Test
+     *no integration with view plane and triangle
+     */
     @Test
     public void cameraRayTriangleIntegrationTest4(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
