@@ -1,4 +1,4 @@
-package unittests;
+package Test;
 import elements.Camera;
 import geometries.Plane;
 import geometries.Sphere;
