@@ -29,10 +29,10 @@ public class RenderTests {
 
         Scene scene;
         scene= new Scene.SceneBuilder("Test scene 800X500")
-                .addAmbientLight(new AmbientLight(new Color(255, 50, 191), 1))
+                .addAmbientLight(new AmbientLight(new Color(50, 70, 90), 1))
                 .addCamera(new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0)))
                 .addDistance(100)
-                .addBackground(new  Color(75, 127, 250))
+                .addBackground(new  Color(60, 60, 60))
                 .build();
 
         scene.addGeometries(new Sphere(50, new Point3D(0, 0, 100)));
