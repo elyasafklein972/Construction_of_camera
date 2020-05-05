@@ -106,7 +106,7 @@ public class RenderTests {
                 .build();
 
         scene.addGeometries(new Sphere(50, new Point3D(0, 0, 100)));
-
+//
         scene.addGeometries(
                 new Triangle(new Point3D(100, 0, 100), new Point3D(0, 100, 100), new Point3D(100, 100, 100)),
                 new Triangle(new Point3D(100, 0, 100), new Point3D(0, -100, 100), new Point3D(100, -100, 100)),
