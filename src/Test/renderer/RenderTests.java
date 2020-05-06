@@ -120,5 +120,70 @@ public class RenderTests {
         render.printGrid(100, java.awt.Color.YELLOW);
         render.writeToImage();
     }
+    /**
+     * Produce a scene with basic 3D model and render it into a jpeg image with a
+     * grid
+     */
+    @Test
+    public void basicRenderTwoColorTest4() {
+        final double WIDTH = 800d;
+        final double HEIGHT = 500d;
+        final int NX =1600;
+        final int NY =1000;
 
+        Scene scene;
+        scene= new Scene.SceneBuilder("Test scene 1600x1000 small2")
+                .addAmbientLight(new AmbientLight(new Color(255, 255, 255), 1))
+                .addCamera(new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0)))
+                .addDistance(100)
+                .addBackground(new  Color(255, 255, 0))
+                .build();
+
+        scene.addGeometries(new Sphere(20, new Point3D(0, 0, 100)));
+//
+        scene.addGeometries(
+                new Triangle(new Color(0,0,0),new Point3D(100, 0, 100), new Point3D(0, 100, 100), new Point3D(100, 100, 100)),
+                new Triangle(new Color(255,0,255),new Point3D(100, 0, 100), new Point3D(0, -100, 100), new Point3D(100, -100, 100)),
+                new Triangle(new Color(0,0,255),new Point3D(-100, 0, 100), new Point3D(0, 100, 100), new Point3D(-100, 100, 100)),
+                new Triangle(new Color(0,255,0),new Point3D(-100, 0, 100), new Point3D(0, -100, 100), new Point3D(-100, -100, 100)));
+
+        ImageWriter imageWriter = new ImageWriter("base render test 1600X1000 small2", WIDTH, HEIGHT, NX, NY);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.printGrid(100, java.awt.Color.BLUE);
+        render.writeToImage();
+    }
+    /**
+     * Produce a scene with basic 3D model and render it into a jpeg image with a
+     * grid
+     */
+    @Test
+    public void basicRenderTwoColorTest5() {
+        final double WIDTH = 800d;
+        final double HEIGHT = 500d;
+        final int NX =1600;
+        final int NY =1000;
+
+        Scene scene;
+        scene= new Scene.SceneBuilder("Test scene 1600x1000 Israel flag")
+                .addAmbientLight(new AmbientLight(new Color(0, 0, 255), 1))
+                .addCamera(new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0)))
+                .addDistance(100)
+                .addBackground(new  Color(255, 255, 255))
+                .build();
+
+      //  scene.addGeometries(new Sphere(20, new Point3D(0, 0, 100)));
+//
+        scene.addGeometries(
+                new Triangle(new Color(0,0,0),new Point3D(-150, 100, 100), new Point3D(150, 100, 100), new Point3D(0, -150, 100)),
+                new Triangle(new Color(0,0,0),new Point3D(-150, -100, 100), new Point3D(150, -100, 100), new Point3D(0, 150, 100)));
+
+        ImageWriter imageWriter = new ImageWriter("base render test 1600X1000 Israel Flag", WIDTH, HEIGHT, NX, NY);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.printGrid(100, java.awt.Color.BLUE);
+        render.writeToImage();
+    }
 }
