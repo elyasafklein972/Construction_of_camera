@@ -1,7 +1,6 @@
 package geometries;
 
-
-
+import elements.Material;
 import primitives.Point3D;
 import primitives.*;
 
@@ -10,10 +9,10 @@ import java.util.List;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
-public class Plane implements Geometry {
+public class Plane extends Geometry {
 
-    Point3D _p;
-    primitives.Vector _normal;
+    Point3D _p; //Q
+    Vector _normal;
 
     public Point3D get_p() {
         return _p;
@@ -23,7 +22,9 @@ public class Plane implements Geometry {
         return _normal;
     }
 
-    public Plane(Point3D p1, Point3D p2, Point3D p3) {
+    public Plane(Color emissionLight, Material material, Point3D p1, Point3D p2, Point3D p3) {
+        super(emissionLight, material);
+
         _p = new Point3D(p1);
 
         Vector U = new Vector(p1, p2);
@@ -31,36 +32,38 @@ public class Plane implements Geometry {
         Vector N = U.crossProduct(V);
         N.normalize();
 
-        _normal = N.scale(-1);
+        _normal = N;
+//        _normal = N.scale(-1);
 
     }
 
+    public Plane(Color emissionLight, Point3D p1, Point3D p2, Point3D p3) {
+        this(emissionLight, new Material(0, 0, 0), p1, p2, p3);
+    }
+
+    public Plane(Point3D p1, Point3D p2, Point3D p3) {
+        this(Color.BLACK, p1, p2, p3);
+    }
+
     public Plane(Point3D _p, Vector _normal) {
+        super(Color.BLACK, new Material(0, 0, 0));
+
         this._p = new Point3D(_p);
         this._normal = new Vector(_normal);
     }
 
     @Override
     public Vector getNormal(Point3D p) {
-        if (this._p==p)
         return _normal;
-        else {
-            throw new IllegalArgumentException("not the same Point");
-
-
-
-        }
     }
 
-    //because polygon
+    //because polygon needs geNormal without parameter
     public Vector getNormal() {
-        return  _normal.normalized();
-
-
+        return getNormal(null);
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray) {
         Vector p0Q;
         try {
             p0Q = _p.subtract(ray.getPoint());
@@ -74,7 +77,12 @@ public class Plane implements Geometry {
 
         double t = alignZero(_normal.dotProduct(p0Q) / nv);
 
-        return t <= 0 ? null : List.of(ray.getPoint(t));
+        if (t <= 0) {
+            return null;
+        }
+
+        GeoPoint geo = new GeoPoint(this, ray.getPoint(t));
+        return List.of(geo);
     }
 
 }

@@ -1,18 +1,12 @@
 package Test;
 import elements.Camera;
+import geometries.Intersectable;
 import geometries.Plane;
 import geometries.Sphere;
 import geometries.Triangle;
 import org.junit.Test;
 import primitives.Point3D;
 import primitives.Vector;
-
-import elements.Camera;
-import org.junit.Test;
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +23,7 @@ public class cameraRayIntersectionsIntegrationTest {
     @Test
     public void cameraRaySphereIntegrationTest1() {
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
-        List<Point3D> intersections=new ArrayList<Point3D>();
+        List<Intersectable.GeoPoint> intersections= new ArrayList<>();
         Sphere sphere = new Sphere(1, new Point3D(0, 0, 3));
         int count=0;
 
@@ -55,7 +49,7 @@ public class cameraRayIntersectionsIntegrationTest {
     public void cameraRaySphereIntegrationTest2() {
         Camera cam = new Camera(new Point3D(0, 0, -0.5), new Vector(0, 0, 1), new Vector(0, -1, 0));
         Sphere sphere = new Sphere(2.5, new Point3D(0, 0, 2.5));
-       List<Point3D> intersections=new ArrayList<Point3D>();
+       List<Intersectable.GeoPoint> intersections= new ArrayList<>();
         int count = 0;
 
 
@@ -80,7 +74,7 @@ public class cameraRayIntersectionsIntegrationTest {
     public void cameraRaySphereIntegrationTest3() {
         Camera cam = new Camera(new Point3D(0, 0, -0.5), new Vector(0, 0, 1), new Vector(0, -1, 0));
         Sphere sphere = new Sphere(2, new Point3D(0, 0, 2));
-        List<Point3D> intersections=new ArrayList<Point3D>();
+        List<Intersectable.GeoPoint> intersections=new ArrayList<>();
         int count = 0;
 
 
@@ -104,7 +98,7 @@ public class cameraRayIntersectionsIntegrationTest {
     public void cameraRaySphereIntegrationTest4() {
         Camera cam = new Camera(new Point3D(2, 2, 2), new Vector(0, 0, 1), new Vector(0, -1, 0));
         Sphere sphere = new Sphere(4, new Point3D(2, 2, 2));
-        List<Point3D> intersections=new ArrayList<Point3D>();
+        List<Intersectable.GeoPoint> intersections= new ArrayList<>();
         int count = 0;
 
 
@@ -130,7 +124,7 @@ public class cameraRayIntersectionsIntegrationTest {
     public void cameraRaySphereIntegrationTest5() {
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
         Sphere sphere = new Sphere(0.5, new Point3D(0, 0, -1));
-        List<Point3D> intersections=new ArrayList<Point3D>();
+        List<Intersectable.GeoPoint> intersections= new ArrayList<>();
         int count = 0;
 
 
@@ -155,7 +149,7 @@ public class cameraRayIntersectionsIntegrationTest {
     public void cameraRayPlaneIntegrationTest1(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
         Plane plane = new Plane(new Point3D(0,0,4),new Vector(0,0,1));
-        List<Point3D> intersections=new ArrayList<Point3D>();
+        List<Intersectable.GeoPoint> intersections= new ArrayList<>();
         int count = 0;
 
 
@@ -179,7 +173,7 @@ public class cameraRayIntersectionsIntegrationTest {
     public void cameraRayPlaneIntegrationTest2(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
         Plane plane = new Plane(new Point3D(0,0,4),new Vector(2,2,0));
-        List<Point3D> intersections=new ArrayList<Point3D>();
+        List<Intersectable.GeoPoint> intersections= new ArrayList<>();
         int count = 0;
 
 
@@ -204,7 +198,7 @@ public class cameraRayIntersectionsIntegrationTest {
     public void cameraRayPlaneIntegrationTest3(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
         Plane plane = new Plane(new Point3D(0,0,4),new Vector(1,0,0));
-        List<Point3D> intersections=new ArrayList<Point3D>();
+        List<Intersectable.GeoPoint> intersections= new ArrayList<>();
         int count = 0;
 
 
@@ -229,7 +223,7 @@ public class cameraRayIntersectionsIntegrationTest {
     public void cameraRayPlaneIntegrationTest4(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
         Plane plane = new Plane(new Point3D(0,0,-1),new Vector(1,0,0));
-        List<Point3D> intersections=new ArrayList<Point3D>();
+        List<Intersectable.GeoPoint> intersections=new ArrayList<Intersectable.GeoPoint>();
         int count = 0;
 
 
@@ -253,7 +247,7 @@ public class cameraRayIntersectionsIntegrationTest {
     public void cameraRayTriangleIntegrationTest1(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
        Triangle tri=new Triangle(new Point3D(0,-1,2),new Point3D(1,1,2),new Point3D(-1,1,2));
-        List<Point3D> intersections=new ArrayList<Point3D>();
+        List<Intersectable.GeoPoint> intersections= new ArrayList<>();
         int count = 0;
 
 
@@ -277,7 +271,7 @@ public class cameraRayIntersectionsIntegrationTest {
     public void cameraRayTriangleIntegrationTest2(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
         Triangle tri=new Triangle(new Point3D(0,-20,2),new Point3D(1,1,2),new Point3D(-1,1,2));
-        List<Point3D> intersections=new ArrayList<Point3D>();
+        List<Intersectable.GeoPoint> intersections= new ArrayList<>();
         int count = 0;
 
 
@@ -301,7 +295,7 @@ public class cameraRayIntersectionsIntegrationTest {
     public void cameraRayTriangleIntegrationTest3(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
         Triangle tri=new Triangle(new Point3D(0,-20,2),new Point3D(1,20,2),new Point3D(-1,20,2));
-        List<Point3D> intersections=new ArrayList<Point3D>();
+        List<Intersectable.GeoPoint> intersections= new ArrayList<>();
         int count = 0;
 
 
@@ -324,7 +318,7 @@ public class cameraRayIntersectionsIntegrationTest {
     public void cameraRayTriangleIntegrationTest4(){
         Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
         Triangle tri=new Triangle(new Point3D(0,-40,2),new Point3D(1,-30,2),new Point3D(-1,-30,2));
-        List<Point3D> intersections=new ArrayList<Point3D>();
+        List<Intersectable.GeoPoint> intersections= new ArrayList<>();
         int count = 0;
 
 

@@ -1,5 +1,7 @@
 package geometries;
 
+import elements.Material;
+import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -15,7 +17,7 @@ import static primitives.Util.isZero;
  *
  * @author Dan
  */
-public class Polygon implements Geometry {
+public class Polygon extends Geometry {
     /**
      * List of polygon's vertices
      */
@@ -46,7 +48,10 @@ public class Polygon implements Geometry {
      *                                  <li>The polygon is concave (not convex)</li>
      *                                  </ul>
      */
-    public Polygon(Point3D... vertices) {
+    public Polygon(Color emissionLight, Material material, Point3D... vertices) {
+
+        super(emissionLight,material);
+
         if (vertices.length < 3)
             throw new IllegalArgumentException("A polygon can't have less than 3 vertices");
         _vertices = List.of(vertices);
@@ -85,16 +90,24 @@ public class Polygon implements Geometry {
         }
     }
 
+    public Polygon(Color emissionLight, Point3D... vertices) {
+        this(emissionLight,new Material(0,0,0),vertices);
+    }
+    public Polygon(Point3D... vertices) {
+        this(Color.BLACK,new Material(0,0,0),vertices);
+//        this(new Color(java.awt.Color.RED),new Material(0,0,0),vertices);
+    }
+
     @Override
     public Vector getNormal(Point3D point) {
         return _plane.getNormal();
     }
 
-
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
-        List<Point3D> intersections = _plane.findIntersections(ray);
-        if (intersections == null) return null;
+    public List<GeoPoint> findIntersections(Ray ray) {
+        List<GeoPoint> intersections = _plane.findIntersections(ray);
+        if (intersections == null)
+            return null;
 
         Point3D p0 = ray.getPoint();
         Vector v = ray.getDirection();
@@ -114,6 +127,8 @@ public class Polygon implements Geometry {
             if (isZero(sign)) return null;
             if (positive != (sign >0)) return null;
         }
+
+        intersections.get(0)._geometry = this;
 
         return intersections;
     }
