@@ -67,7 +67,7 @@ public class Render {
      * @return the closest point to the camera
      */
 
-    private GeoPoint getClosestPoint(List<GeoPoint> intersectionPoints) {
+    public GeoPoint getClosestPoint(List<GeoPoint> intersectionPoints) {
         GeoPoint result = null;
         double mindist = Double.MAX_VALUE;
 
@@ -113,7 +113,7 @@ public class Render {
      * @return the color intensity
      */
 
-    private Color calcColor(GeoPoint intersection) {
+    public Color calcColor(GeoPoint intersection) {
         Color resultColor;
         Color ambientLight = _scene.getAmbientLight().getIntensity();
         Color emissionLight = intersection.getGeometry().getEmissionLight();
