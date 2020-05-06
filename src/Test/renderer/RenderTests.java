@@ -215,7 +215,7 @@ public class RenderTests {
                 .addBackground(new  Color(0, 0, 0))
                 .build();
 
-        scene.addGeometries(new Sphere(new Color(0,153,153),20, new Point3D(0, 0, 100)));
+        scene.addGeometries(new Sphere(new Color(0,153,153),50, new Point3D(0, 0, 100)));
 //
         scene.addGeometries(
                 new Triangle(new Color(0,153,153),new Point3D(100, 0, 100), new Point3D(0, 100, 100), new Point3D(100, 100, 100)),
