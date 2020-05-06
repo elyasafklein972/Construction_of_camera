@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 public class CameraTest {
 
     /**
+     * כ
      * Test method for
      * {@link elements.Camera#constructRayThroughPixel(int, int, int, int, double, double, double)}.
      */
