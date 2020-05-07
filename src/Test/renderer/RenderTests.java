@@ -187,7 +187,7 @@ public class RenderTests {
       //  scene.addGeometries(new Sphere(20, new Point3D(0, 0, 100)));
 //
         scene.addGeometries(
-                new Triangle(new Color(255,0,0),new Point3D(-150, 100, 100), new Point3D(150, 100, 100), new Point3D(0, -150, 100)),
+                new Triangle(new Color(0,0,0),new Point3D(-150, 100, 100), new Point3D(150, 100, 100), new Point3D(0, -150, 100)),
                 new Triangle(new Color(0,0,0),new Point3D(-150, -100, 100), new Point3D(150, -100, 100), new Point3D(0, 150, 100)));
 
         ImageWriter imageWriter = new ImageWriter("base render test 1600X1000 Israel Flag", WIDTH, HEIGHT, NX, NY);
