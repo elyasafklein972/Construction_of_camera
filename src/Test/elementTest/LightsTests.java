@@ -1,11 +1,11 @@
-package unittests;
+package elements;
 
-import org.junit.Test;
-
-import elements.*;
 import geometries.*;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import primitives.*;
-import renderer.*;
+import renderer.ImageWriter;
+import renderer.Render;
 import scene.Scene;
 
 /**
@@ -20,11 +20,12 @@ public class LightsTests {
      */
     @Test
     public void sphereDirectional() {
-        Scene scene = new Scene("Test scene");
-        scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
-        scene.setDistance(1000);
-        scene.setBackground(Color.BLACK);
-        scene.setAmbientLight(new AmbientLight(Color.BLACK, 0));
+        Scene scene= new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(Color.BLACK, 0))
+                .addCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)))
+                .addDistance(1000)
+                .addBackground(Color.BLACK)
+                .build();
 
         scene.addGeometries(
                 new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 100), 50, new Point3D(0, 0, 50)));
@@ -43,11 +44,13 @@ public class LightsTests {
      */
     @Test
     public void spherePoint() {
-        Scene scene = new Scene("Test scene");
-        scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
-        scene.setDistance(1000);
-        scene.setBackground(Color.BLACK);
-        scene.setAmbientLight(new AmbientLight(Color.BLACK, 0));
+        Scene scene= new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(Color.BLACK, 0))
+                .addCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)))
+                .addDistance(1000)
+                .addBackground(Color.BLACK)
+                .build();
+
 
         scene.addGeometries(
                 new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 100), 50, new Point3D(0, 0, 50)));
@@ -66,11 +69,14 @@ public class LightsTests {
      */
     @Test
     public void sphereSpot() {
-        Scene scene = new Scene("Test scene");
-        scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
-        scene.setDistance(1000);
-        scene.setBackground(Color.BLACK);
-        scene.setAmbientLight(new AmbientLight(Color.BLACK, 0));
+
+        Scene scene= new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(Color.BLACK, 0))
+                .addCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)))
+                .addDistance(1000)
+                .addBackground(Color.BLACK)
+                .build();
+
 
         scene.addGeometries(
                 new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 100), 50, new Point3D(0, 0, 50)));
@@ -90,11 +96,14 @@ public class LightsTests {
      */
     @Test
     public void trianglesDirectional() {
-        Scene scene = new Scene("Test scene");
-        scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
-        scene.setDistance(1000);
-        scene.setBackground(Color.BLACK);
-        scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
+
+        Scene scene= new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15))
+                .addCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)))
+                .addDistance(1000)
+                .addBackground(Color.BLACK)
+                .build();
+
 
         scene.addGeometries(
                 new Triangle(Color.BLACK, new Material(0.8, 0.2, 300),
@@ -115,12 +124,13 @@ public class LightsTests {
      * Produce a picture of a two triangles lighted by a point light
      */
     @Test
-    public void trianglesPoint() {
-        Scene scene = new Scene("Test scene");
-        scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
-        scene.setDistance(1000);
-        scene.setBackground(Color.BLACK);
-        scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
+    public void trianglesPointLight() {
+        Scene scene= new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15))
+                .addCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)))
+                .addDistance(1000)
+                .addBackground(Color.BLACK)
+                .build();
 
         scene.addGeometries(
                 new Triangle(Color.BLACK, new Material(0.5, 0.5, 300),
@@ -144,11 +154,13 @@ public class LightsTests {
      */
     @Test
     public void trianglesSpot() {
-        Scene scene = new Scene("Test scene");
-        scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
-        scene.setDistance(1000);
-        scene.setBackground(Color.BLACK);
-        scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
+        Scene scene= new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15))
+                .addCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)))
+                .addDistance(1000)
+                .addBackground(Color.BLACK)
+                .build();
+
 
         scene.addGeometries(
                 new Triangle(Color.BLACK, new Material(0.5, 0.5, 300),

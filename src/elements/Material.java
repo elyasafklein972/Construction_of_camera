@@ -11,11 +11,11 @@ public class Material {
         this._nShininess = _nShininess;
     }
 
-    public double getkD() {
+    public double getKd() {
         return _kD;
     }
 
-    public double getkS() {
+    public double getKs() {
         return _kS;
     }
 
