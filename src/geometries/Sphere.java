@@ -9,7 +9,7 @@ import java.util.Objects;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
-public class Sphere extends RadialGeometry {
+public class  Sphere extends RadialGeometry {
     /**
      * The center of the sphere
      */
