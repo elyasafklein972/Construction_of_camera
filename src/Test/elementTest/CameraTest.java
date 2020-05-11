@@ -1,4 +1,4 @@
-package unittests;
+package Test.elementTest;
 
 import elements.Camera;
 import org.junit.Test;

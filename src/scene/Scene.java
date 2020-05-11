@@ -68,6 +68,26 @@ public class Scene {
         _lights.add(light);
     }
 
+    public void setBackground(Color _background) {
+        this._background = _background;
+    }
+
+    public void setCamera(Camera _camera) {
+        this._camera = _camera;
+    }
+
+    public void setDistance(double _distance) {
+        this._distance = _distance;
+    }
+
+    public void setAmbientLight(AmbientLight _ambientLight) {
+        this._ambientLight = _ambientLight;
+    }
+
+    public void setLights(List<LightSource> _lights) {
+        this._lights = _lights;
+    }
+
     public static class SceneBuilder {
         private String name;
         private Color background;
