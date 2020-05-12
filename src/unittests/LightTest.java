@@ -183,4 +183,67 @@ public class LightTest {
         render.writeToImage();
     }
 
+
+   /************our test***********/
+
+
+
+    /**
+     * Produce a picture of a sphere lighted by a directional light
+     */
+    @Test
+    public void sphereTest() {
+
+        Scene  scene= new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(new Color(java.awt.Color.orange), 0.3d))
+                .addCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)))
+                .addDistance(1000)
+                .addBackground(new Color(255,255,255))
+                .build();
+
+        scene.addGeometries(
+                new Sphere(new Color(java.awt.Color.DARK_GRAY), new Material(0.5, 0.5, 100), 50, new Point3D(0, 0, 50)));
+
+        scene.addLights(new DirectionalLight(new Color(200, 300, 0), new Vector(0, 0, 1)));
+
+        ImageWriter imageWriter = new ImageWriter("sphereTest", 150, 150, 500, 500);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
+
+    /**
+     * Produce a picture of a two triangles lighted by a point light
+     */
+    @Test
+    public void trianglesPoint2() {
+
+        Scene  scene= new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(new Color(java.awt.Color.cyan), 0.2d))
+                .addCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)))
+                .addDistance(800)
+                .addBackground(Color.BLACK)
+                .build();
+
+        scene.addGeometries(
+                new Triangle(new Color(0,200,200), new Material(0.5, 0.5, 300),
+                        new Point3D(-150, 150, 150), new Point3D(150, 150, 150), new Point3D(75, -75, 150)),
+                new Triangle(Color.BLACK, new Material(0.5, 0.5, 300),
+                        new Point3D(-150, 150, 150), new Point3D(-70, -70, 50), new Point3D(75, -75, 150)));
+
+        scene.addLights(new PointLight(new Color(0, 255, 0),
+                new Point3D(12, -17, 130),
+                2, 0.001, 0.001));
+
+        ImageWriter imageWriter = new ImageWriter("triangTest", 200, 200, 500, 500);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
+
+
+
+
 }
