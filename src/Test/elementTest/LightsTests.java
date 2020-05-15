@@ -178,5 +178,31 @@ public class LightsTests {
         render.renderImage();
         render.writeToImage();
     }
+    /**
+     * Produce a picture of a sphere lighted by a spot light
+     */
+    @Test
+    public void sphereSpot2() {
+
+        Scene scene= new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(Color.BLACK, 0))
+                .addCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)))
+                .addDistance(1000)
+                .addBackground(Color.BLACK)
+                .build();
+
+
+        scene.addGeometries(
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 100), 50, new Point3D(0, 0, 50)));
+
+        scene.addLights(new SpotLight(new Color(500, 300, 0), new Point3D(-150, 150, -150),
+                new Vector(10, -10, 20), 1, 0.00001, 0.00000001));
+
+        ImageWriter imageWriter = new ImageWriter("sphereSpot2", 150, 150, 500, 500);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
 
 }
