@@ -198,7 +198,7 @@ public class LightTest {
                 .addAmbientLight(new AmbientLight(new Color(java.awt.Color.orange), 0.3d))
                 .addCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)))
                 .addDistance(1000)
-                .addBackground(new Color(255,255,255))
+                .addBackground(new Color(0,0,0))
                 .build();
 
         scene.addGeometries(
