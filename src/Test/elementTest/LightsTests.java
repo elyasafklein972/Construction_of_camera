@@ -178,5 +178,56 @@ public class LightsTests {
         render.renderImage();
         render.writeToImage();
     }
+    /**
+     * Produce a picture of a sphere lighted by a spot light
+     */
+    @Test
+    public void spherePoint2() {
+
+        Scene scene= new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(Color.BLACK, 0))
+                .addCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)))
+                .addDistance(1000)
+                .addBackground(Color.BLACK)
+                .build();
+
+
+        scene.addGeometries(
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 100), 50, new Point3D(0, 0, 50)));
+
+        scene.addLights(new PointLight(new Color(500, 300, 0),new Point3D(-50, 50, -50), 1, 0.00001, 0.00000001));
+
+        ImageWriter imageWriter = new ImageWriter("spherePoint2", 150, 150, 500, 500);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
+
+    /**
+     * Produce a picture of a sphere lighted by a spot light
+     */
+    @Test
+    public void spherePoint3() {
+
+        Scene scene= new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(Color.BLACK, 0))
+                .addCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(2, -1, 0)))
+                .addDistance(1000)
+                .addBackground(Color.BLACK)
+                .build();
+
+
+        scene.addGeometries(
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 100), 50, new Point3D(0, 0, 50)));
+
+        scene.addLights(new DirectionalLight(new Color(500, 300, 0) ,new Vector(-2, -2, -2)));
+
+        ImageWriter imageWriter = new ImageWriter("sphereDirectionalLight3", 150, 150, 500, 500);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
 
 }
