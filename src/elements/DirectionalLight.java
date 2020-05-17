@@ -7,7 +7,6 @@ import primitives.Vector;
 public class DirectionalLight extends Light implements LightSource {
     private Vector _direction;
 
-
     /**
      * Initialize directional light with it's intensity and direction, direction
      * vector will be normalized.
@@ -17,7 +16,7 @@ public class DirectionalLight extends Light implements LightSource {
      */
 
     public DirectionalLight(Color colorintensity, Vector direction) {
-        super(colorintensity);
+        _intensity = colorintensity;
         _direction = direction.normalized();
     }
 
@@ -28,7 +27,8 @@ public class DirectionalLight extends Light implements LightSource {
      */
     @Override
     public Color getIntensity(Point3D p) {
-        return _intensity;
+        return super.getIntensity();
+        //       return _intensity;
     }
 
     //instead of getDirection()

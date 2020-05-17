@@ -172,7 +172,7 @@ public class LightsTests {
                 new Point3D(10, 10, 130), new Vector(-2, 2, 1),
                 1, 0.0001, 0.000005));
 
-        ImageWriter imageWriter = new ImageWriter("trianglesSpot", 200, 200, 500, 500);
+        ImageWriter imageWriter = new ImageWriter("trianglesSpot1", 200, 200, 500, 500);
         Render render = new Render(imageWriter, scene);
 
         render.renderImage();

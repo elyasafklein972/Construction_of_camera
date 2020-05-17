@@ -1,6 +1,7 @@
 
 package geometries;
 
+import elements.Material;
 import primitives.Color;
 
 import static primitives.Util.isZero;
@@ -10,25 +11,43 @@ import static primitives.Util.isZero;
  * RadialGeometry is ana abstract class that defines
  * all radial geometries.
  */
-public abstract class RadialGeometry extends Geometry{
-    protected double  _radius;
+public abstract class RadialGeometry extends Geometry {
+    protected double _radius;
 
     /**
+     * constructor for a new extended  RadialGeometry object.
      *
-     * @param _radius
+     * @param radius   the radius of the RadialGeometry
+     * @param material the material of the RadialGeometry
+     * @throws Exception in case of negative or zero radius
      */
-    public RadialGeometry(Color emissionLight, double _radius) {
-        super(emissionLight);
-        if (isZero(_radius) || (_radius < 0.0))
-            throw new IllegalArgumentException("radius "+ _radius +" is not valid");
-        this._radius = _radius;
+    public RadialGeometry(Color emissionLight, double radius, Material material) {
+        super(emissionLight, material);
+        setRadius(radius);
     }
 
-    public RadialGeometry(RadialGeometry other){
-        super(Color.BLACK);
-        this._radius= other._radius;
+    public RadialGeometry(Color emissionLight, double radius) {
+        super(emissionLight);
+        setRadius(radius);
     }
+
+    public RadialGeometry(double radius) {
+        super();
+        setRadius(radius);
+    }
+
+    public RadialGeometry(RadialGeometry other) {
+        super(other._emission, other._material);
+        setRadius(other._radius);
+    }
+
     public double getRadius() {
         return _radius;
+    }
+
+    public void setRadius(double radius) {
+        if (isZero(radius) || (radius < 0.0))
+            throw new IllegalArgumentException("radius " + radius + " is not valid");
+        this._radius = radius;
     }
 }
