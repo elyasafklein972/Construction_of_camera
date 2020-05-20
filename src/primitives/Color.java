@@ -16,6 +16,7 @@ public class Color {
     private double _r = 0.0, _g = 0.0, _b = 0.0;
 
     public final static Color BLACK = new Color();
+    public final static Color WHITE = new Color(255,255,255);
 
     /**
      * Default constructor - to generate Black Color (privately)

@@ -1,10 +1,10 @@
+
 package elements;
 
 import primitives.Color;
 import primitives.Point3D;
 import primitives.Util;
 import primitives.Vector;
-
 
 /**
  * The SpotLight object specifies an attenuated light source at a fixed point in space that radiates light
@@ -24,8 +24,8 @@ import primitives.Vector;
  * of an object's surface. A spot light does not contribute to ambient reflections.
  */
 public class SpotLight extends PointLight {
-    Vector _direction;
-    double _concentration;
+    private  Vector _direction;
+    private double _concentration;
 
     public SpotLight(Color colorIntensity, Point3D position, Vector direction, double kC, double kL, double kQ, double concentration) {
         super(colorIntensity, position, kC, kL, kQ);
@@ -36,6 +36,7 @@ public class SpotLight extends PointLight {
     public SpotLight(Color colorIntensity, Point3D position, Vector direction, double kC, double kL, double kQ) {
         this(colorIntensity, position, direction, kC, kL, kQ, 1);
     }
+
 
     /**
      * @return spotlight intensity
@@ -56,8 +57,12 @@ public class SpotLight extends PointLight {
 
         return (pointlightIntensity.scale(factor));
     }
-    @Override
-    public Vector getL(Point3D p) {
+
+    public Vector getDirection() {
         return _direction;
+    }
+
+    public double getConcentration() {
+        return _concentration;
     }
 }

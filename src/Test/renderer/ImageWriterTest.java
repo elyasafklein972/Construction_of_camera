@@ -25,4 +25,5 @@ class ImageWriterTest {
         }
         imageWriter.writeToImage();
     }
+
 }
