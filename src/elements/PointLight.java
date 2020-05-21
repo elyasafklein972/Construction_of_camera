@@ -2,7 +2,10 @@ package elements;
 
 import primitives.Color;
 import primitives.Point3D;
+import primitives.Util;
 import primitives.Vector;
+
+import static primitives.Util.alignZero;
 
 /**
  * The PointLight object specifies an attenuated light source at a fixed point in space that radiates light equally
@@ -72,5 +75,10 @@ public class PointLight extends Light implements LightSource {
             return null;
         }
         return p.subtract(_position).normalize();
+    }
+
+    @Override
+    public double getDistance(Point3D point) {
+        return alignZero(_position.distance(point));
     }
 }
