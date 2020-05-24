@@ -118,7 +118,7 @@ public class Scene {
             this.ambientLight = ambientLight;
             return this;
         }
-
+//
         public Scene build() {
             Scene scene = new Scene(this.name);
             scene._camera = this.camera;
