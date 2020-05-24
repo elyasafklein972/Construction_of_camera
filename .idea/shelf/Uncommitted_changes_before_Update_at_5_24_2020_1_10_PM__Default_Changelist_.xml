@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_5_24_2020_1_10_PM_[Default_Changelist]" date="1590315030457" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_24_2020_1_10_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 5/24/2020 1:10 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/primitives/scene/Scene.class" />
+    <option name="AFTER_PATH" value="out/production/primitives/scene/Scene.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_24_2020_1_10_PM_[Default_Changelist]/Scene.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/primitives/scene/Scene$SceneBuilder.class" />
+    <option name="AFTER_PATH" value="out/production/primitives/scene/Scene$SceneBuilder.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_24_2020_1_10_PM_[Default_Changelist]/Scene$SceneBuilder.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/primitives/elements/Material.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+</changelist>
