@@ -1,4 +1,4 @@
-package renderer;
+package Test.renderer;
 
 
 import elements.AmbientLight;
@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
+import renderer.ImageWriter;
+import renderer.Render;
 import scene.Scene;
 
 /**
@@ -55,7 +57,7 @@ public class ShadowTests {
     }
 
     /**
-     * Sphere-Triangle shading - move triangle up-right
+     * Sphere-Triangle shading - move triangle up-right1
      */
     @Test
     public void SphereTriangleMove1() {
@@ -91,7 +93,7 @@ public class ShadowTests {
     }
 
     /**
-     * Sphere-Triangle shading - move triangle upper-righter
+     * Sphere-Triangle shading - move triangle upper-righter2
      */
     @Test
     public void SphereTriangleMove2() {
@@ -121,6 +123,114 @@ public class ShadowTests {
         render.renderImage();
         render.writeToImage();
     }
+
+
+    /**
+     * Sphere-Triangle shading - move triangle upper-righter3
+     */
+    @Test
+    public void SphereTriangleMove3() {
+        Scene scene;
+        scene = new Scene.SceneBuilder("Test scene")
+                .addDistance(1000)
+                .addAmbientLight(new AmbientLight(Color.BLACK, 0))
+                .addBackground(Color.BLACK)
+                .addCamera(new Camera(
+                        new Point3D(0, 0, -1000),
+                        new Vector(0, 0, 1),
+                        new Vector(0, -1, 0)))
+                .build();
+
+
+        scene.addGeometries(new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
+                        60, new Point3D(0, 0, 200)), //
+                new Triangle(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
+                        new Point3D(-49, 19, 0),
+                        new Point3D(-19, 49, 0),
+                        new Point3D(-47, 47, 4)));
+
+        scene.addLights(new SpotLight(new Color(400, 240, 0), //
+                new Point3D(-100, 100, -200), new Vector(1, -1, 3), 1, 1E-5, 1.5E-7));
+
+        ImageWriter imageWriter = new ImageWriter("sphereTriangleMove3", 200, 200, 400, 400);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
+
+    /**
+     * Sphere-Triangle shading - changing light position1
+     */
+    @Test
+    public void SphereTriangleMove4() {
+        Scene scene;
+        scene = new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(Color.BLACK, 0))
+                .addBackground(Color.BLACK)
+                .addDistance(1000)
+                .addCamera(new Camera(
+                        new Point3D(0, 0, -1000),
+                        new Vector(0, 0, 1),
+                        new Vector(0, -1, 0)))
+                .build();
+
+
+        scene.addGeometries(new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
+                        60, new Point3D(0, 0, 200)), //
+                new Triangle(
+                        new Color(java.awt.Color.BLUE),
+                        new Material(0.5, 0.5, 30), //
+                        new Point3D(-70, 40, 10),
+                        new Point3D(-40, 70, 10),
+                        new Point3D(-68, 68, 4)));
+
+        scene.addLights(new SpotLight(new Color(400, 240, 0), //
+                new Point3D(-83, 83, -120), new Vector(1, -1, 3), 1, 1E-5, 1.5E-7));
+
+        ImageWriter imageWriter = new ImageWriter("sphereTriangleMove4", 200, 200, 400, 400);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
+
+    /**
+     * Sphere-Triangle shading - changing light position2
+     */
+    @Test
+    public void SphereTriangleMove5() {
+        Scene scene;
+        scene = new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(Color.BLACK, 0))
+                .addBackground(Color.BLACK)
+                .addDistance(1000)
+                .addCamera(new Camera(
+                        new Point3D(0, 0, -1000),
+                        new Vector(0, 0, 1),
+                        new Vector(0, -1, 0)))
+                .build();
+
+
+        scene.addGeometries(new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
+                        60, new Point3D(0, 0, 200)), //
+                new Triangle(
+                        new Color(java.awt.Color.BLUE),
+                        new Material(0.5, 0.5, 30), //
+                        new Point3D(-70, 40, 10),
+                        new Point3D(-40, 70, 10),
+                        new Point3D(-68, 68, 4)));
+
+        scene.addLights(new SpotLight(new Color(400, 240, 0), //
+                new Point3D(-73, 73, -45), new Vector(1, -1, 3), 1, 1E-5, 1.5E-7));
+
+        ImageWriter imageWriter = new ImageWriter("sphereTriangleMove5", 200, 200, 400, 400);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
+
 
     /**
      * Sphere-Triangle shading - move spot closer

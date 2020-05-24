@@ -44,6 +44,25 @@ public class Scene {
         return this._background;
     }
 
+    public void set_background(Color _background) {
+        this._background = _background;
+    }
+
+    public void set_camera(Camera _camera) {
+        this._camera = _camera;
+    }
+
+    public void set_distance(double _distance) {
+        this._distance = _distance;
+    }
+
+    public void set_ambientLight(AmbientLight _ambientLight) {
+        this._ambientLight = _ambientLight;
+    }
+
+    public void set_lights(List<LightSource> _lights) {
+        this._lights = _lights;
+    }
 
     public List<LightSource> getLightSources() {
         return _lights;
