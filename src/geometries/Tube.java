@@ -99,8 +99,33 @@ public class Tube extends RadialGeometry {
         return check.normalize();
     }
 
+    /**
+     * @param
+     * @return returns normal vector
+     */
+    /*
     @Override
-    public List<GeoPoint> findIntersections(Ray anotherray) {
+    public Vector getNormal(Point3D point) {
+        //The vector from the point of the cylinder to the given point
+        Point3D o = _ray.getPoint(); // at this point o = p0
+        Vector v = _ray.getDirection();
+
+        Vector vector1 = point.subtract(o);
+
+        //We need the projection to multiply the _direction unit vector
+        double projection = vector1.dotProduct(v);
+        if (!isZero(projection)) {
+            // projection of P-O on the ray:
+            o = o.add(v.scale(projection));
+        }
+
+        //This vector is orthogonal to the _direction vector.
+        Vector check = point.subtract(o);
+        return check.normalize();
+    }
+*/
+    @Override
+    public List<GeoPoint> findIntersections(Ray anotherray, double maxDistance) {
         //TODO implementation
 
         Point3D P = anotherray.getPoint();

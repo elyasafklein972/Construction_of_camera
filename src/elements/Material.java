@@ -1,63 +1,31 @@
 package elements;
 
 public class Material {
-    private double _kD;
-    private double _kS;
-    private int _nShininess;
+    private final double _kD;
+    private final double _kS;
+    private final int _nShininess;
+    private final double _kr;
+    private final double _kt;
 
-    private double _Kr; // Reflection coefficient (1 for mirror)
-    private double _Kt; // Refraction coefficient (1 for transparent)
 
-    public Material(double _kD, double _kS, int _nShininess) {
-        this._kD = _kD;
-        this._kS = _kS;
-        this._nShininess = _nShininess;
+    public Material(double kD, double kS, int nShininess, double kt, double kr) {
+        this._kD = kD;
+        this._kS = kS;
+        this._nShininess = nShininess;
+        this._kt = kt;
+        this._kr = kr;
     }
 
-    public Material(double _kD, double _kS, int _nShininess, double _Kr, double _Kt) {
-        this._kD = _kD;
-        this._kS = _kS;
-        this._nShininess = _nShininess;
-        this._Kr = _Kr;
-        this._Kt = _Kt;
+    public Material(double kD, double kS, int nShininess) {
+        this(kD, kS, nShininess, 0, 0);
     }
 
-    // ***************** Constructors ********************** //
-    public Material() {
-        _kD = 1;
-        _kS = 1;
-        _Kr = 0;
-        _Kt = 0;
-        _nShininess = 1;
+    public Material(Material material) {
+        this(material._kD, material._kS, material._nShininess, material._kt, material._kr);
     }
 
-    public Material(Material material)
-    {
-        _kD = material.getkD();
-        _kS = material.getkS();
-        _Kr = material.getKr();
-        _Kt = material.getKt();
-        _nShininess = material.getnShininess();
-    }
-
-    public void setkD(double _kD) {
-        this._kD = _kD;
-    }
-
-    public void setkS(double _kS) {
-        this._kS = _kS;
-    }
-
-    public void setNShininess(int _nShininess) {
-        this._nShininess = _nShininess;
-    }
-
-    public void setKr(double _Kr) {
-        this._Kr = _Kr;
-    }
-
-    public void setKt(double _Kt) {
-        this._Kt = _Kt;
+    public int getnShininess() {
+        return _nShininess;
     }
 
     public double getkD() {
@@ -68,17 +36,11 @@ public class Material {
         return _kS;
     }
 
-    public int getnShininess() {
-        return _nShininess;
-    }
-
     public double getKr() {
-        return _Kr;
+        return _kr;
     }
 
     public double getKt() {
-        return _Kt;
+        return _kt;
     }
-    // ***************** Getters/Setters ********************** //
-
 }

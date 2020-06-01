@@ -71,6 +71,7 @@ public class ImageWriter {
     // ***************** Operations ******************** //
 
     /**
+    /**
      * Function writeToImage produces unoptimized jpeg file of
      * the image according to pixel color matrix in the directory
      * of the project

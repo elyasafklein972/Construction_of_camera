@@ -63,18 +63,18 @@ public class  Sphere extends RadialGeometry {
     }
 
     @Override
-    public List<GeoPoint> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray, double maxDistance) {
         Point3D p0 = ray.getPoint();
         Vector v = ray.getDirection();
         Vector u;
         try {
             u = _center.subtract(p0);   // p0 == _center
         } catch (IllegalArgumentException e) {
-            return List.of(new GeoPoint(this,(ray.getPoint(_radius))));
+            return List.of(new GeoPoint(this, (ray.getPoint(this._radius))));
         }
         double tm = alignZero(v.dotProduct(u));
         double dSquared = (tm == 0) ? u.lengthSquared() : u.lengthSquared() - tm * tm;
-        double thSquared = alignZero(_radius * _radius - dSquared);
+        double thSquared = alignZero(this._radius * this._radius - dSquared);
 
         if (thSquared <= 0) return null;
 
@@ -83,15 +83,32 @@ public class  Sphere extends RadialGeometry {
 
         double t1 = alignZero(tm - th);
         double t2 = alignZero(tm + th);
-        if (t1 <= 0 && t2 <= 0) return null;
-        if (t1 > 0 && t2 > 0) {
-            return List.of(
-                    new GeoPoint(this,(ray.getPoint(t1)))
-                    ,new GeoPoint(this,(ray.getPoint(t2)))); //P1 , P2
+
+        double t1dist = alignZero(maxDistance - t1);
+        double t2dist = alignZero(maxDistance - t2);
+
+        if (t1 <= 0 && t2 <= 0) {
+            return null;
         }
-        if (t1 > 0)
-            return List.of(new GeoPoint(this,(ray.getPoint(t1))));
-        else
-            return List.of(new GeoPoint(this,(ray.getPoint(t2))));
+
+        if (t1 > 0 && t2 > 0) {
+            if (t1dist > 0 && t2dist > 0) {
+                return List.of(
+                        new GeoPoint(this, (ray.getPoint(t1))),
+                        new GeoPoint(this, (ray.getPoint(t2)))); //P1 , P2
+            } else if (t1dist > 0) {
+                return List.of(
+                        new GeoPoint(this, (ray.getPoint(t1))));
+            } else if (t2dist > 0) {
+                return List.of(
+                        new GeoPoint(this, (ray.getPoint(t2))));
+            }
+        }
+
+        if ((t1 > 0) && (t1dist > 0))
+            return List.of(new GeoPoint(this, (ray.getPoint(t1))));
+        else if ((t2 > 0) && (t2dist > 0))
+            return List.of(new GeoPoint(this, (ray.getPoint(t2))));
+        return null;
     }
 }

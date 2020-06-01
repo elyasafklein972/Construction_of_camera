@@ -6,6 +6,7 @@ import primitives.Ray;
 import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Geometries implements Intersectable {
@@ -24,20 +25,18 @@ public class Geometries implements Intersectable {
     }
 
     /**
-     * Na le Hasbir befrotrot
-     *
      * @param ray the ray that intersect the geometries
      * @return list of Point3D that intersect the osef
      */
     @Override
-    public List<GeoPoint> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray, double maxDistance) {
         List<GeoPoint> intersections = null;
 
         for (Intersectable geo : _geometries) {
-            List<GeoPoint> tempIntersections = geo.findIntersections(ray);
+            List<GeoPoint> tempIntersections = geo.findIntersections(ray, maxDistance);
             if (tempIntersections != null) {
                 if (intersections == null)
-                    intersections = new ArrayList<>();
+                    intersections = new LinkedList<>();
                 intersections.addAll(tempIntersections);
             }
         }

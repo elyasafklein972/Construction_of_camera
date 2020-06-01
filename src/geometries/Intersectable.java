@@ -4,7 +4,6 @@ import primitives.*;
 
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Intersectable is a common interface for all geometries that are able
@@ -12,38 +11,48 @@ import java.util.Objects;
  */
 public interface Intersectable {
 
-    public static class GeoPoint {
+    /**
+     * @param ray ray pointing toward a Gepmtry
+     * @return List<GeoPoint> return values
+     */
+    default List<GeoPoint> findIntersections(Ray ray) {
+        return findIntersections(ray, Double.POSITIVE_INFINITY);
+    }
 
-        Geometry _geometry;
-        Point3D point;
+    List<GeoPoint> findIntersections(Ray ray, double maxDistance);
+
+    /**
+     * GeoPoint is just a tuple holding
+     * references to a specific point ain a specific geometry
+     */
+    class GeoPoint {
+
+        protected Geometry _geometry;
+        protected Point3D point;
 
         public GeoPoint(Geometry _geometry, Point3D pt) {
-            this._geometry= _geometry;
-            point =pt;
+            this._geometry = _geometry;
+            point = pt;
+        }
 
+        public Point3D getPoint() {
+            return point;
         }
 
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
+
             GeoPoint geoPoint = (GeoPoint) o;
-            return _geometry.equals(geoPoint._geometry) &&
-                    point.equals(geoPoint.point);
+
+            return ((_geometry.equals(geoPoint._geometry)) && (point.equals(geoPoint.point)));
         }
 
-
-        public Point3D getPoint() {
-            return  new Point3D(point);
-        }
         public Geometry getGeometry() {
-            return  _geometry;
+            return _geometry;
         }
-    }  /**
-     *
-     * @param ray ray pointing toward a Gepmtry
-     * @return List<Point3D> return values
-     */
-    List<GeoPoint> findIntersections(Ray ray);
+    }
+    //end of GeoPoint
 
 }

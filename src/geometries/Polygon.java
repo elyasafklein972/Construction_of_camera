@@ -105,10 +105,11 @@ public class Polygon extends FlatGeometry {
         return _plane.getNormal();
     }
 
+
     @Override
-    public List<Intersectable.GeoPoint> findIntersections(Ray ray) {
-        List<Intersectable.GeoPoint> palaneIntersections = _plane.findIntersections(ray);
-        if (palaneIntersections == null)
+    public List<GeoPoint> findIntersections(Ray ray, double maxDistance) {
+        List<GeoPoint> planeIntersections = _plane.findIntersections(ray, maxDistance);
+        if (planeIntersections == null)
             return null;
 
         Point3D p0 = ray.getPoint();
@@ -131,9 +132,9 @@ public class Polygon extends FlatGeometry {
         }
 
         //for GeoPoint
-        List<Intersectable.GeoPoint> result = new LinkedList<>();
-        for (Intersectable.GeoPoint geo : palaneIntersections) {
-            result.add(new Intersectable.GeoPoint(this, geo.getPoint()));
+        List<GeoPoint> result = new LinkedList<>();
+        for (GeoPoint geo : planeIntersections) {
+            result.add(new GeoPoint(this, geo.getPoint()));
         }
         return result;
     }
