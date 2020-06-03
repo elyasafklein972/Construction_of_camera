@@ -76,6 +76,35 @@ public class Camera {
         return new Ray(_p0, Vij);
 
     }
+    public Ray constructRayThroughPixel(int nX, int nY,
+                                        double j, double i, double screenDistance,
+                                        double screenWidth, double screenHeight) {
+        if (isZero(screenDistance)) {
+            throw new IllegalArgumentException("distance cannot be 0");
+        }
+
+        Point3D Pc = _p0.add(_vTo.scale(screenDistance));
+
+        double Ry = screenHeight / nY;
+        double Rx = screenWidth / nX;
+
+        double yi = ((i - nY / 2d) * Ry + Ry / 2d);
+        double xj = ((j - nX / 2d) * Rx + Rx / 2d);
+
+        Point3D Pij = Pc;
+
+        if (!isZero(xj)) {
+            Pij = Pij.add(_vRight.scale(xj));
+        }
+        if (!isZero(yi)) {
+            Pij = Pij.subtract(_vUp.scale(yi)); // Pij.add(_vUp.scale(-yi))
+        }
+
+        Vector Vij = Pij.subtract(_p0);
+
+        return new Ray(_p0, Vij);
+
+    }
     public List<Ray> constructRayBeamThroughPixel(int nX, int nY,
                                                   int j, int i, double screenDistance,
                                                   double screenWidth, double screenHeight, double supersamplingRate) {

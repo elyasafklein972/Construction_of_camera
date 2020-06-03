@@ -13,7 +13,9 @@ import primitives.Ray;
 import primitives.Vector;
 import scene.Scene;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static geometries.Intersectable.GeoPoint;
 import static primitives.Util.alignZero;
@@ -23,9 +25,11 @@ import static primitives.Util.isZero;
  *
  */
 public class Render {
+    private Scene scene;
+    private ImageWriter imageWriter;
     private static final int MAX_CALC_COLOR_LEVEL = 10;
     private static final double MIN_CALC_COLOR_K = 0.001;
-
+    private static  final int MAX_RAYS = 6;
     private final ImageWriter _imageWriter;
     private final Scene _scene;
 
@@ -88,8 +92,14 @@ public class Render {
         } else {    //supersampling
             for (int row = 0; row < Ny; row++) {
                 for (int collumn = 0; collumn < Nx; collumn++) {
-                    List<Ray> rays = camera.constructRayBeamThroughPixel(Nx, Ny, collumn, row, distance, width, height, _supersamplingRate);
+                //    List<Ray> rays = camera.constructRayBeamThroughPixel(Nx, Ny, collumn, row, distance, width, height, _supersamplingRate);
                     Color averageColor = Color.BLACK;
+                    //makes a list of the multiple rays that goes through different parts of the pixel
+                    List<Ray> rays = getRaysThroughPixel(row, collumn);
+
+                    //will store the colors in that pixel in a list later
+                  //  List<Color> raysColors = new ArrayList<>();
+
                     Color Bckg = new Color(background);
                     for (Ray ray : rays) {
                         GeoPoint closestPoint = findClosestIntersection(ray);
@@ -403,4 +413,30 @@ public class Render {
         }
         return true;
     }
+    //this function improves ray tracing by making multiple rays through different parts of the pixel
+    private List<Ray> getRaysThroughPixel(int x, int y){
+
+        //the ratio of the screen dimensions to the number of pixels
+        double Rx = imageWriter.getWidth() /imageWriter.getNx();
+        double Ry = imageWriter.getHeight() / imageWriter.getNy();
+
+        //store the rays in a list
+        List<Ray> raysThroughPixel = new ArrayList<>();
+
+        //i will go from -1/2 * the max to 1/2 max
+        for (int i = (-1 * MAX_RAYS) / 2; i <= MAX_RAYS / 2; i++) {
+            for (int j = (-1 * MAX_RAYS) / 2; j <= MAX_RAYS / 2; j++) {
+
+                //calculating the coordinate of the offset rays
+                double iOffSet = (i * Rx) / MAX_RAYS;
+                double jOffSet = (j * Ry) / MAX_RAYS;
+                //making a ray to that position and placing it in the list
+                Ray ray = scene.getCamera().constructRayThroughPixel(imageWriter.getNx(), imageWriter.getNy(), x + iOffSet, y + jOffSet, scene.getDistance(), imageWriter.getWidth(), imageWriter.getHeight());
+                raysThroughPixel.add(ray);
+            }
+        }
+
+        return raysThroughPixel;
+    }
+
 }
