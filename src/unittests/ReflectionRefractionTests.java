@@ -270,7 +270,7 @@ public class ReflectionRefractionTests {
 
         //scene.addLights(new SpotLight(new Color(700, 400, 400), //
                // new Point3D(60, -50, 0), new Vector(0, 0, 1), 1, 4E-5, 2E-7));
-
+//
 
         ImageWriter imageWriter = new ImageWriter("myPicture3", 200, 200, 600, 600);
         Render render = new Render(imageWriter, scene);
