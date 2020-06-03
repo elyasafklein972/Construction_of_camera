@@ -3,6 +3,7 @@
  */
 package unittests;
 
+import geometries.Plane;
 import org.junit.Test;
 
 import elements.*;
@@ -170,6 +171,77 @@ public class ReflectionRefractionTests {
         render.renderImage();
         render.writeToImage();
     }
+    /**
+     * Produce a picture of a two triangles lighted by a spot light with a partially transparent Sphere
+     *  producing partial shadow
+     */
+    @Test
+    public void sphereWithTransparent() {
+        Scene scene = new Scene("Test scene");
+        scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
+        scene.setDistance(1000);
+        scene.setBackground(new Color(255,153,0));
+        scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.BLACK), 0.15));
+
+        scene.addGeometries(
+                new Triangle((Color.BLACK), new Material(0.5, 0.5, 60,1, 0.5), //
+                        new Point3D(-150, 150, 115), new Point3D(150, 150, 135), new Point3D(75, -75, 150)), //
+                new Triangle((Color.BLACK), new Material(0.5, 0.5, 60,1, 0.5), //
+                        new Point3D(-150, 150, 115), new Point3D(-70, -70, 140), new Point3D(75, -75, 150)), //
+                new Sphere(new Color(153,51,0), new Material(0.2, 0.2, 30, 0.6, 0), 2.4083, new Point3D(0, 0, 0)),
+                new Sphere(new Color(153,51,0), new Material(0.2, 0.2, 30, 0.6, 0), 1.5905, new Point3D(0, -4, 0)),
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), 0.6, new Point3D(1.79, -5.25, 0)),
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), 0.6082, new Point3D(-1.82, -5.19, 0)),
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), 0.8485, new Point3D(2.23, 2.32, 0)),
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), 0.8360, new Point3D(-2.2, 2.31, 0)),
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), .5261, new Point3D(3.48, 2.64, 0)),
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), .5, new Point3D(-4.01, -1.39, 0)),
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), 0.5477, new Point3D(-3.39, 2.94, 0)),
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), .8306, new Point3D(2.74, -1.71, 0)),
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), .8306, new Point3D(-2.77, -1.69, 0)),
+                new Sphere(new Color(java.awt.Color.WHITE), new Material(0.2, 0.2, 30, 0.6, 0), .5, new Point3D(-.77, -4.47, 1.31)),
+             //   new Sphere(new Color(java.awt.Color.GREEN), new Material(0.2, 0.2, 30, 0.6, 0), .3, new Point3D(-.77, -4.47, 1.85)),
+                new Sphere(new Color(java.awt.Color.WHITE), new Material(0.2, 0.2, 30, 0.6, 0), .5, new Point3D(.67, -4.47, 1.31)),
+             //   new Sphere(new Color(java.awt.Color.GREEN), new Material(0.2, 0.2, 30, 0.6, 0), .3, new Point3D(.67, -4.47, 1.85)),
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), .5, new Point3D(4.04, -1.55, 0)));
+        scene.addLights(new SpotLight(new Color(400, 240, 0),new Point3D(0,0,0),new Vector(1, -1, 3), 1, 1E-5, 1.5E-7));
+      //  scene.addLights(new SpotLight(new Color(700, 400, 400), //
+          //      new Point3D(60, -50, 0), new Vector(0, 0, 1), 1, 4E-5, 2E-7));
+
+       // scene.addLights(new SpotLight(new Color(400, 240, 0),new Point3D(0, 0, 0),new Vector(-1, -1, -3), 1, 1E-5, 1.5E-7));
+
+        //   scene.addLights(new SpotLight(new Color(700, 400, 400), //
+    //           new Point3D(0, -4, 0), new Vector(0, 0, 1), 1, 4E-5, 2E-7));
+
+        ImageWriter imageWriter = new ImageWriter("myPicture", 50, 50, 600, 600);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
+    /**
+     * Produce a picture of a two triangles lighted by a spot light with a partially transparent Sphere
+     *  producing partial shadow
+     */
+    @Test
+    public void sphereWithTransparent3() {
+        Scene scene = new Scene("Test scene");
+        scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
+        scene.setDistance(1000);
+        scene.setBackground(new Color(255,153,0));
+        scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.BLACK), 0.15));
+
+        scene.addGeometries(//new Triangle((Color.WHITE), new Material(0.5, 0.5, 60,1, 0.5), new Point3D(0,60,0) ,new Point3D(60,0,0), new Point3D(-60,0,0)), //
+                new Triangle((new Color(0,51,204)), new Material(0.5, 0.5, 60,0, 1), new Point3D(15.54,7.8,0) ,new Point3D(0,32.87,0), new Point3D(-15.61,7.68,0)), //
+                new Triangle((new Color(0,51,204)), new Material(0.5, 0.5, 60,0, 1), new Point3D(15.1,24.72,0) ,new Point3D(0,0,0), new Point3D(-15.31,24.86,0)));//
+        scene.addLights(new SpotLight(new Color(700, 400, 400), //
+                new Point3D(60, -50, 0), new Vector(0, 0, 1), 1, 4E-5, 2E-7));
 
 
+        ImageWriter imageWriter = new ImageWriter("myPicture2", 200, 200, 600, 600);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
 }
