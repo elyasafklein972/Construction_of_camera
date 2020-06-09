@@ -1,9 +1,6 @@
 package renderer;
 
-import elements.AmbientLight;
-import elements.Camera;
-import elements.LightSource;
-import elements.Material;
+import elements.*;
 import geometries.FlatGeometry;
 import geometries.Geometry;
 import geometries.Intersectable;
@@ -212,48 +209,96 @@ public class Render {
                 color = color.add(calcColor(reflectedPoint, reflectedRay, level - 1, kkr).scale(kr));
             }
         }
-
-        double kt = geometryGeo.getMaterial().getKt();
-        double kkt = k * kt;
-
-        if (kkt > MIN_CALC_COLOR_K) {
-            Ray refractedRay = constructRefractedRay(pointGeo, inRay, n);
-            GeoPoint refractedPoint = findClosestIntersection(refractedRay);
-
-            if (refractedPoint != null) {
-                color = color.add(calcColor(refractedPoint, refractedRay, level - 1, kkt).scale(kt));
-            }
-        }
         return color;
     }
+//        double kt = geometryGeo.getMaterial().getKt();
+//        double kkt = k * kt;
+//
+//        if (kkt > MIN_CALC_COLOR_K) {
+//            Ray refractedRay = constructRefractedRay(pointGeo, inRay, n);
+//            GeoPoint refractedPoint = findClosestIntersection(refractedRay);
+//
+//            if (refractedPoint != null) {
+//                color = color.add(calcColor(refractedPoint, refractedRay, level - 1, kkt).scale(kt));
+//            }
+//        }
 
-    private Color getColorLightSources(GeoPoint geoPoint, double k, Color color, Vector v, Vector n, int nShininess, double kd, double ks) {
+
+    private Color getColorLightSources(GeoPoint geoPoint, double k, Color color,
+                                       Vector v, Vector n, int nShininess,
+                                       double kd, double ks)
+    {
         Point3D pointGeo = geoPoint.getPoint();
         if (_scene.getLightSources() != null) {
             for (LightSource lightSource : _scene.getLightSources()) {
-                Vector l = lightSource.getL(pointGeo);
-                double nl = n.dotProduct(l);
-                double nv = n.dotProduct(v);
-                double ktr;
-                if (nl * nv > 0) {
-//                if (unshaded(lightSource, l, n, geoPoint)) {
-//                    ktr = 1d;
-//                } else {
-//                    ktr = 0d;
-//                }
-                    ktr = transparency(lightSource, l, n, geoPoint);
-                    if (ktr * k > MIN_CALC_COLOR_K) {
-                        Color lightIntensity = lightSource.getIntensity(pointGeo).scale(ktr);
-                        color = color.add(
-                                calcDiffusive(kd, nl, lightIntensity),
-                                calcSpecular(ks, l, n, nl, v, nShininess, lightIntensity));
-                    }
-                }
-            }
-        }
-        return color;
-    }
 
+
+                if (lightSource.getRadius() == 0) {
+                    Vector l = lightSource.getL(pointGeo);
+
+                    double nl = n.dotProduct(l);
+                    double nv = n.dotProduct(v);
+                    double ktr;
+                    if (nl * nv > 0) {
+//                if (unshaded(lightSource, l, n, geoPoint)) {
+                        //                  ktr = 1d;
+                        //             } else {
+                        //                 ktr = 0d;
+                        //               }
+                        ktr = transparency(lightSource, l, n, geoPoint);
+                        if (ktr * k > MIN_CALC_COLOR_K) {
+                            Color lightIntensity = lightSource.getIntensity(pointGeo).scale(ktr);
+                            color = color.add(
+                                    calcDiffusive(kd, nl, lightIntensity),
+                                    calcSpecular(ks, l, n, nl, v, nShininess, lightIntensity));
+                        }
+                    }
+                    return color;
+                }
+                else {
+                    double ktr=0.0;
+                    double sizeVecList=0.0;
+                    double  nl=0.0;
+                    double  nl2=0.0;
+                    double nv=0.0;
+
+                    for (LightSource lightSource2 : _scene.getLightSources())
+                        for (Vector vec : lightSource.getLs(pointGeo)) {
+                            sizeVecList += 1;
+                            nl = n.dotProduct(vec);
+                           // nl2+=nl;
+                            nv = n.dotProduct(v);
+                         //   nv2+=nv;
+                            if (nl * nv > 0) {
+//                if (unshaded(lightSource, l, n, geoPoint)) {
+                                //                  ktr = 1d;
+                                //             } else {
+                                //                 ktr = 0d;
+                                //               }
+                                ktr += transparency(lightSource, vec, n, geoPoint);
+                            }
+                        }
+
+
+                            ktr = ktr / sizeVecList;
+                            Vector l = lightSource.getL(pointGeo);
+                           // double nl = n.dotProduct(l);
+                            if (ktr * k > MIN_CALC_COLOR_K) {
+                                Color lightIntensity = lightSource.getIntensity(pointGeo).scale(ktr);
+                                color = color.add(
+                                        calcDiffusive(kd, nl, lightIntensity),
+                                        calcSpecular(ks, l, n, nl, v, nShininess, lightIntensity));
+                            }
+                        }
+                    // return color;
+                }
+                return color;
+
+            }
+        return Color.BLACK;
+    }
+       //return Color;
+    //}
 
     private Ray constructRefractedRay(Point3D pointGeo, Ray inRay, Vector n) {
         return new Ray(pointGeo, inRay.getDirection(), n);
@@ -439,4 +484,35 @@ public class Render {
         return raysThroughPixel;
     }
 
+    public Scene getScene() {
+        return scene;
+    }
+
+    public ImageWriter getImageWriter() {
+        return imageWriter;
+    }
+
+    public static int getMaxCalcColorLevel() {
+        return MAX_CALC_COLOR_LEVEL;
+    }
+
+    public static double getMinCalcColorK() {
+        return MIN_CALC_COLOR_K;
+    }
+
+    public static int getMaxRays() {
+        return MAX_RAYS;
+    }
+
+    public ImageWriter get_imageWriter() {
+        return _imageWriter;
+    }
+
+    public Scene get_scene() {
+        return _scene;
+    }
+
+    public double get_supersamplingRate() {
+        return _supersamplingRate;
+    }
 }

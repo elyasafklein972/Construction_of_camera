@@ -155,7 +155,23 @@ public class Point3D {
 
 
     }
+    /**
+     * subtract - vector subtraction - receives a second
+     * point in the parameter, returns a vector from the second point
+     * to the point at which the operation is performed
+     * @param vec
+     * @return
+     */
+    public Point3D addVector(Vector vec) {
 
+        double dX = (this._x.get() + vec.get_head()._x.get());
+        double dY = (this._y.get() + vec.get_head()._y.get());
+        double dZ = (this._z.get() + vec.get_head()._z.get());
+
+        return new Point3D(new Coordinate(dX),new Coordinate(dY),new Coordinate(dZ));
+
+
+    }
     /**
      * to string fun override
      * @return

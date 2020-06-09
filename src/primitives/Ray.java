@@ -16,7 +16,7 @@ public class Ray {
          * The direction of the ray.
          */
         private final Vector _direction;
-
+        private Point3D stertedPoint;
         /**
          * Constructor for creating a new instance of this class
          * @param point the start of the ray.
@@ -71,9 +71,23 @@ public class Ray {
             return new Point3D(_point);
         }
 
+
     public Point3D getPoint(double length) {
         return isZero(length ) ? _point : new Point3D(_point).add(_direction.scale(length));
     }
+    /**
+     * Getter for the point from which the ray starts.
+     * @return A new Point3D that represents the
+     * point from which the ray starts.
+     */
+    public Point3D getStartPoint() {
+        return new Point3D(_point);
+    }
+
+    public void setStartPoint(Point3D other){
+        this.stertedPoint=other;
+    }
+
 
         /**
          * Getter for the direction of the ray that is

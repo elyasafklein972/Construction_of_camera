@@ -33,6 +33,12 @@ public class SpotLight extends PointLight {
         this._concentration = concentration;
     }
 
+    public SpotLight(Color colorIntensity, Point3D position, Vector direction, double kC, double kL, double kQ, double concentration,double radius) {
+        super(colorIntensity, position, kC, kL, kQ,radius);
+        //this._radius=;
+        this._direction = new Vector(direction).normalized();
+        this._concentration = concentration;
+    }
     public SpotLight(Color colorIntensity, Point3D position, Vector direction, double kC, double kL, double kQ) {
         this(colorIntensity, position, direction, kC, kL, kQ, 1);
     }

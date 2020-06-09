@@ -1,10 +1,7 @@
 package Test.renderer;
 
 
-import elements.AmbientLight;
-import elements.Camera;
-import elements.Material;
-import elements.SpotLight;
+import elements.*;
 import geometries.Sphere;
 import geometries.Triangle;
 import org.junit.jupiter.api.Test;
@@ -294,7 +291,7 @@ public class ShadowTests {
         render.writeToImage();
     }
 
-    /**
+      /**
      * Produce a picture of a two triangles lighted by a spot light with a Sphere producing a shading
      */
     @Test
@@ -323,6 +320,40 @@ public class ShadowTests {
                 new Point3D(40, -40, -115), new Vector(-1, 1, 4), 1, 4E-4, 2E-5));
 
         ImageWriter imageWriter = new ImageWriter("trianglesSphere", 200, 200, 600, 600);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
+    /**
+     * Produce a picture of a two triangles lighted by a spot light with a Sphere producing a shading
+     */
+    @Test
+    public void trianglesSphere2() {
+        Scene scene;
+        scene = new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(Color.BLACK, 0))
+                .addBackground(Color.BLACK)
+                .addDistance(1000)
+                .addCamera(new Camera(
+                        new Point3D(0, 0, -1000),
+                        new Vector(0, 0, 1),
+                        new Vector(0, -1, 0)))
+                .build();
+
+
+        scene.addGeometries( //
+                new Triangle(new Color(150,0,0), new Material(0, 0.8, 60), //
+                        new Point3D(-150, 150, 115), new Point3D(150, 150, 135), new Point3D(75, -75, 150)), //
+                new Triangle(new Color(150,0,0), new Material(0, 0.8, 60), //
+                        new Point3D(-150, 150, 115), new Point3D(-70, -70, 140), new Point3D(75, -75, 150)), //
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), // )
+                        30, new Point3D(0, 0, 115)));
+
+        scene.addLights(new PointLight(new Color(700, 400, 400), //
+                new Point3D(0,0, 20), 1, 4E-4, 2E-5,3));
+
+        ImageWriter imageWriter = new ImageWriter("trianglesSphere2", 200, 200, 600, 600);
         Render render = new Render(imageWriter, scene);
 
         render.renderImage();

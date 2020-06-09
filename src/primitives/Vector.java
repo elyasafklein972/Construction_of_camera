@@ -26,6 +26,7 @@ public class Vector {
 
 
     }
+    public Vector(){}
     public  Vector(Point3D p1,Point3D p2){
         this._head=p1.subtract(p2)._head;
     }

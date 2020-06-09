@@ -4,9 +4,21 @@ import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
 
+import java.util.List;
+
 public class DirectionalLight extends Light implements LightSource {
     private final Vector _direction;
-
+    public Point3D getPosition(){
+        return null;
+    }
+    @Override
+    public double getRadius() {
+        return 0d;
+    }
+public List<Vector> getLs(Point3D p)
+{
+  return null;
+}
     /**
      * Initialize directional light with it's intensity and direction, direction
      * vector will be normalized.
