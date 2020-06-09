@@ -351,7 +351,7 @@ public class ShadowTests {
                         30, new Point3D(0, 0, 115)));
 
         scene.addLights(new PointLight(new Color(700, 400, 400), //
-                new Point3D(0,0, 20), 1, 4E-4, 2E-5,3));
+                new Point3D(-30,-30, 30), 1, 4E-4, 2E-5,4));
 
         ImageWriter imageWriter = new ImageWriter("trianglesSphere2", 200, 200, 600, 600);
         Render render = new Render(imageWriter, scene);
@@ -359,5 +359,40 @@ public class ShadowTests {
         render.renderImage();
         render.writeToImage();
     }
+    /**
+     * Produce a picture of a two triangles lighted by a spot light with a Sphere producing a shading
+     */
+    @Test
+    public void trianglesSphere3() {
+        Scene scene;
+        scene = new Scene.SceneBuilder("Test scene")
+                .addAmbientLight(new AmbientLight(Color.BLACK, 0))
+                .addBackground(Color.BLACK)
+                .addDistance(1000)
+                .addCamera(new Camera(
+                        new Point3D(0, 0, -1000),
+                        new Vector(0, 0, 1),
+                        new Vector(0, -1, 0)))
+                .build();
+
+
+        scene.addGeometries( //
+                new Triangle(new Color(150,0,0), new Material(0, 0.8, 60), //
+                        new Point3D(-150, 150, 115), new Point3D(150, 150, 135), new Point3D(75, -75, 150)), //
+                new Triangle(new Color(150,0,0), new Material(0, 0.8, 60), //
+                        new Point3D(-150, 150, 115), new Point3D(-70, -70, 140), new Point3D(75, -75, 150)), //
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), // )
+                        30, new Point3D(0, 0, 115)));
+
+        scene.addLights(new PointLight(new Color(700, 400, 400), //
+                new Point3D(-30,-30, 30), 1, 4E-4, 2E-5));
+
+        ImageWriter imageWriter = new ImageWriter("trianglesSphere2_no soft shadow", 200, 200, 600, 600);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
+
 
 }

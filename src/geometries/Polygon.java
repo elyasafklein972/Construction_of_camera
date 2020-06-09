@@ -117,7 +117,7 @@ public class Polygon extends FlatGeometry {
 
         Vector v1 = _vertices.get(1).subtract(p0);
         Vector v2 = _vertices.get(0).subtract(p0);
-        double sign = v.dotProduct(v1.crossProduct(v2));
+        double sign = v.dotProduct(v1.crossProduct(v2).normalized());
         if (isZero(sign))
             return null;
 
@@ -126,7 +126,7 @@ public class Polygon extends FlatGeometry {
         for (int i = _vertices.size() - 1; i > 0; --i) {
             v1 = v2;
             v2 = _vertices.get(i).subtract(p0);
-            sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
+            sign = alignZero(v.dotProduct(v1.crossProduct(v2).normalized()));
             if (isZero(sign)) return null;
             if (positive != (sign > 0)) return null;
         }

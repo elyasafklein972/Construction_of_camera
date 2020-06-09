@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.stream.Collectors;
 
 import static primitives.Util.alignZero;
 
@@ -119,7 +120,7 @@ public class PointLight extends Light implements LightSource {
                     pointLights.add(new Point3D(-_position.get_x().get() + x, -_position.get_y().get() + y, -_position.get_z().get() + z));
 
                 }
-
+        pointLights=pointLights.stream().distinct().collect(Collectors.toList());
         if (p.equals(_position)) {
             return null;
         }

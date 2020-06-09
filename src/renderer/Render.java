@@ -105,8 +105,10 @@ public class Render {
                         } else {
                             averageColor = averageColor.add(calcColor(closestPoint, ray));
                         }
+                       // averageColor.add(ambientLight.getIntensity());
                         averageColor.scale(1d / rays.size());
                     }
+
                     _imageWriter.writePixel(collumn, row, averageColor.getColor());
                 }
             }
@@ -169,7 +171,7 @@ public class Render {
 
     private Color calcColor(GeoPoint geoPoint, Ray inRay) {
         Color color = calcColor(geoPoint, inRay, MAX_CALC_COLOR_LEVEL, 1.0);
-        color = color.add(_scene.getAmbientLight().getIntensity());
+       // color = color.add(_scene.getAmbientLight().getIntensity());
         return color;
     }
 
@@ -223,7 +225,6 @@ public class Render {
 //            }
 //        }
 
-
     private Color getColorLightSources(GeoPoint geoPoint, double k, Color color,
                                        Vector v, Vector n, int nShininess,
                                        double kd, double ks)
@@ -258,17 +259,17 @@ public class Render {
                 else {
                     double ktr=0.0;
                     double sizeVecList=0.0;
-                    double  nl=0.0;
-                    double  nl2=0.0;
+
+                   // double  nl2=0.0;
                     double nv=0.0;
 
                     for (LightSource lightSource2 : _scene.getLightSources())
                         for (Vector vec : lightSource.getLs(pointGeo)) {
                             sizeVecList += 1;
-                            nl = n.dotProduct(vec);
-                           // nl2+=nl;
+                          double  nl = n.dotProduct(vec);
+
                             nv = n.dotProduct(v);
-                         //   nv2+=nv;
+
                             if (nl * nv > 0) {
 //                if (unshaded(lightSource, l, n, geoPoint)) {
                                 //                  ktr = 1d;
@@ -280,25 +281,24 @@ public class Render {
                         }
 
 
-                            ktr = ktr / sizeVecList;
-                            Vector l = lightSource.getL(pointGeo);
-                           // double nl = n.dotProduct(l);
-                            if (ktr * k > MIN_CALC_COLOR_K) {
-                                Color lightIntensity = lightSource.getIntensity(pointGeo).scale(ktr);
-                                color = color.add(
-                                        calcDiffusive(kd, nl, lightIntensity),
-                                        calcSpecular(ks, l, n, nl, v, nShininess, lightIntensity));
-                            }
-                        }
-                    // return color;
+                    ktr = ktr / sizeVecList;
+                    Vector l = lightSource.getL(pointGeo);
+                    double nl = n.dotProduct(l);
+                    // double nl = n.dotProduct(l);
+                    if (ktr * k > MIN_CALC_COLOR_K) {
+                        Color lightIntensity = lightSource.getIntensity(pointGeo).scale(ktr);
+                        color = color.add(
+                                calcDiffusive(kd, nl, lightIntensity),
+                                calcSpecular(ks, l, n, nl, v, nShininess, lightIntensity));
+                    }
                 }
-                return color;
-
+                // return color;
             }
+            return color;
+
+        }
         return Color.BLACK;
     }
-       //return Color;
-    //}
 
     private Ray constructRefractedRay(Point3D pointGeo, Ray inRay, Vector n) {
         return new Ray(pointGeo, inRay.getDirection(), n);
@@ -419,7 +419,7 @@ public class Render {
     }
 
     private double transparency(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
-        Vector lightDirection = l.scale(-1); // from point to light source
+        Vector lightDirection = l.scale(-1).normalize(); // from point to light source
         Ray lightRay = new Ray(geopoint.getPoint(), lightDirection, n);
         Point3D pointGeo = geopoint.getPoint();
 
