@@ -120,7 +120,7 @@ public class PointLight extends Light implements LightSource {
                     pointLights.add(new Point3D(-_position.get_x().get() + x, -_position.get_y().get() + y, -_position.get_z().get() + z));
 
                 }
-        pointLights=pointLights.stream().distinct().collect(Collectors.toList());
+        pointLights=pointLights.stream().distinct().collect(Collectors.toList());//down duplicate
         if (p.equals(_position)) {
             return null;
         }

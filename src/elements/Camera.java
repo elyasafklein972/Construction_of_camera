@@ -144,7 +144,7 @@ public class Camera {
 
     }
 
-    public List<Ray> construct9RaysBeamThroughPixel(int nX, int nY, double i, double j, double screenDist, double screenWidth, double screenHeight) {
+    public List<Ray> constructRaysBeamThroughPixel(int nX, int nY, double i, double j, double screenDist, double screenWidth, double screenHeight) {
 
         double Rx = screenWidth / nX;//the length of pixel in X axis
         double Ry = screenHeight / nY;////the length of pixel in Y axis

@@ -338,49 +338,6 @@ public class ReflectionRefractionTests {
     }
 
     //_______________
-    //-=-=-=-=-=-=-=-=-=--------------------------
-    @Test
-    public void Soft_Shadow_final_scene(){
-        Scene scene = new Scene("Test scene");
-        scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
-        scene.setDistance(200);
-        scene.setBackground(new Color(249, 251, 255));
-        scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
-
-       // Scene scene = new Scene();
-      //  scene.setDistance(200);
-      //  scene.setBackground(new Color(249, 251, 255));
-        scene.addGeometries(//
-           //     new Sphere(new Color(0, 1, 250),new Material(0.4,0.3,20,0.7,0),300, new Point3D(-100, -100, -1000)),
-                new Sphere(new Color(47, 205, 24),new Material(0.4,0.3,15,0,0),150, new Point3D(-100, -100, -1000)),
-               // new Sphere(new Color(0,0,100),new Material(0.4,0.3,20,0,0),300, new Point3D(300, 300, -1000)),
-                new Triangle(new Color(7,39,72),new Material(0,0,0,0,1),new Point3D(  1800, 0, -1500),
-                        new Point3D( -1000,  1500, -1500),
-                        new Point3D( -1000, -1500, -1500)),
-                new Triangle(new Color(9, 74, 90),new Material(0,0,0,0,0.5),new Point3D(  1000, 1500, -1505),
-                        new Point3D( -1800,  0, -1505),
-                        new Point3D( 1000, -1500, -1505)));
-                //     new Plane(new Point3D(-1750,0,-1200),new Vector(-1,0,-1)));
-
-
-
-       // scene.addLights(new SpotLight(new Color(43, 48, 11),  new Point3D(2000, 1500, 0),
-         //       new Vector(500, 0, 0), 0, 0.000001, 0.00000009,1,3));
-
-        scene.addLights(new PointLight(new Color(45, 51, 15),  new Point3D(2300, 2300, -150),
-                0, 0.000001, 0.00000008,3));
-
-
-
-
-
-        ImageWriter imageWriter = new ImageWriter("scene_with_softShadow", 500, 500, 5000, 5000);
-
-        Render render = new Render(imageWriter, scene);
-
-        render.renderImage();
-        render.writeToImage();
-    }
 
 
 
