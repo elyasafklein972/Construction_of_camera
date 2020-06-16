@@ -256,9 +256,9 @@ public class ReflectionRefractionTests {
         scene.setBackground(new Color(255,153,0));
         scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.BLACK), 0.15));
 
-        scene.addGeometries(new Polygon((Color.WHITE), new Material(0.5, 0.5, 60,1, 0.5),new Point3D(-23.61,-18.29,0),
+        scene.addGeometries(new Polygon((Color.WHITE), new Material(0.5, 0.5, 60,.5, 1),new Point3D(-23.61,-18.29,0),
         new Point3D(41.91,-19.91,0),new Point3D(50,-10,0),new Point3D(-23.77,-9.53,0)),
-                new Polygon((Color.WHITE), new Material(0.5, 0.5, 60,1, 0.5),new Point3D(0,-28.34,0),new Point3D(23.74,-28.67,0),new Point3D(29,-19,0),new Point3D(-8.04,-18.61,0)),
+                new Polygon((Color.WHITE), new Material(0.5, 0.5, 60,.5, 1),new Point3D(0,-28.34,0),new Point3D(23.74,-28.67,0),new Point3D(29,-19,0),new Point3D(-8.04,-18.61,0)),
                 new Triangle((new Color(153,153,102)), new Material(0.5, 0.5, 60,.5, 1), //
                         new Point3D(-150, 150, 115), new Point3D(150, 150, 135), new Point3D(75, -75, 150)), //
                 new Triangle((new Color(153,153,102)), new Material(0.5, 0.5, 60,.5, 1), //
