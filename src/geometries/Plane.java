@@ -64,6 +64,7 @@ public class Plane extends Geometry {
 
     @Override
     public List<GeoPoint> findIntersections(Ray ray, double maxDistance) {
+
         Vector p0Q;
         try {
             p0Q = _p.subtract(ray.getPoint());

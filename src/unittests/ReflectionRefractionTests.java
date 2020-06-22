@@ -298,6 +298,12 @@ public class ReflectionRefractionTests {
                 new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), // )
                         30, new Point3D(60, -50, 50)));
 
+        scene.addBox(   new Triangle(Color.BLACK, new Material(0.5, 0.5, 60), //
+                        new Point3D(-150, 150, 115), new Point3D(150, 150, 135), new Point3D(75, -75, 150)), //
+                new Triangle(Color.BLACK, new Material(0.5, 0.5, 60), //
+                        new Point3D(-150, 150, 115), new Point3D(-70, -70, 140), new Point3D(75, -75, 150)), //
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), // )
+                        30, new Point3D(60, -50, 50)));
               scene.addLights(new PointLight(new Color(700, 400, 400), //
                 new Point3D(90, -80, 50 ), 1, 4E-5, 2E-7,4));
 
@@ -336,7 +342,37 @@ public class ReflectionRefractionTests {
         render.renderImage();
         render.writeToImage();
     }
+    @Test
+    public void trianglesTransparentSphereSoft4_1() {
+        Scene scene = new Scene("Test scene");
+        scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
+        scene.setDistance(1000);
+        scene.setBackground(Color.BLACK);
+        scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
 
+        scene.addGeometries( //
+             //  new Triangle(Color.BLACK, new Material(0.5, 0.5, 60), //
+            //            new Point3D(-150, 150, 115), new Point3D(150, 150, 135), new Point3D(75, -75, 150)), //
+            //    new Triangle(Color.BLACK, new Material(0.5, 0.5, 60), //
+           //             new Point3D(-150, 150, 115), new Point3D(-70, -70, 140), new Point3D(75, -75, 150)), //
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), // )
+                        30, new Point3D(60, -50, 50)));
+
+       // scene.addBox(//   new Triangle(Color.BLACK, new Material(0.5, 0.5, 60), //
+                    //    new Point3D(-150, 150, 115), new Point3D(150, 150, 135), new Point3D(75, -75, 150)), //
+            //    new Triangle(Color.BLACK, new Material(0.5, 0.5, 60), //
+                      //  new Point3D(-150, 150, 115), new Point3D(-70, -70, 140), new Point3D(75, -75, 150)), //
+            //   new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), // )
+             //          30, new Point3D(60, -50, 50)));
+        scene.addLights(new PointLight(new Color(700, 400, 400), //
+                new Point3D(90, -80, 50 ), 1, 4E-5, 2E-7,4));
+
+        ImageWriter imageWriter = new ImageWriter("shadow with transparency4.1", 200, 200, 600, 600);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
     //_______________
 
 

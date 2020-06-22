@@ -1,6 +1,7 @@
 package renderer;
 
 import elements.*;
+import geometries.Box;
 import geometries.FlatGeometry;
 import geometries.Geometry;
 import geometries.Intersectable;
@@ -154,19 +155,32 @@ public class Render {
             threads[i] = new Thread(() -> {
                 Pixel pixel = new Pixel();
                 while (thePixel.nextPixel(pixel)) {
-
+                    boolean flag = false;
                     Ray rays = camera.constructRayThroughPixel(nX, nY, pixel.col, pixel.row, dist, width, height);
-                    GeoPoint closestPoint = findClosestIntersection(rays);
-                    if (closestPoint == null)
+                    if(_scene.get_box().size()!=0)
                     {
-                        _imageWriter.writePixel(pixel.col, pixel.row, background);
-                    }
-                    else
-                        {
-                    _imageWriter.writePixel(pixel.col, pixel.row, calcColor(closestPoint,rays).getColor());
+                        for (Box j : _scene.get_box()) {
+
+                            if (j.isIntersectionWithBox(rays)) {
+                                    flag = true;
+                            }
                         }
+                    }
+                    else {
+                        flag=true;
+                    }
+                        if(flag)
+                        {
+                            GeoPoint closestPoint = findClosestIntersection(rays);
+                            if (closestPoint == null) {
+                                _imageWriter.writePixel(pixel.col, pixel.row, background);
+                            } else {
+                                _imageWriter.writePixel(pixel.col, pixel.row, calcColor(closestPoint, rays).getColor());
+                            }
+                        }
+                    }
                 }
-            }
+
                 );
         }
 
@@ -239,6 +253,8 @@ public class Render {
 
         if (intersectionPoints == null) {
             return null;
+
+
         }
 
         GeoPoint result = null;
@@ -275,22 +291,26 @@ public class Render {
         double closestDistance = Double.MAX_VALUE;
         Point3D ray_p0 = ray.getPoint();
 
-        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(ray);
-        if (intersections == null)
-            return null;
+    //    Box box=new Box(_scene.getGeometries());//make new box from geometry
+      //  if (box.contains(ray)) {//check the box
+            List<GeoPoint> intersections = _scene.getGeometries().findIntersections(ray);
+            if (intersections == null)
+                return null;
 
-        for (GeoPoint geoPoint : intersections) {
-            double distance = ray_p0.distance(geoPoint.getPoint());
-            if (distance < closestDistance) {
-                closestDistance = distance;
-                closestPoint = geoPoint;
+            for (GeoPoint geoPoint : intersections) {
+                double distance = ray_p0.distance(geoPoint.getPoint());
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestPoint = geoPoint;
+                }
             }
+            return closestPoint;
         }
-        return closestPoint;
-    }
+    //   return null;
+   // }
 
     private Color calcColor(GeoPoint geoPoint, Ray inRay) {
-        Color color = calcColor(geoPoint, inRay, MAX_CALC_COLOR_LEVEL, 1.0);
+        Color color = calcColor(geoPoint, inRay, MAX_CALC_COLOR_LEVEL,  1.0);
        // color = color.add(_scene.getAmbientLight().getIntensity());
         return color;
     }

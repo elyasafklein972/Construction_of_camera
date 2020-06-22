@@ -1,6 +1,7 @@
 package scene;
 
 import elements.*;
+import geometries.Box;
 import geometries.Geometries;
 import geometries.Intersectable;
 import primitives.Color;
@@ -18,6 +19,16 @@ public class Scene {
     private double _distance;
     private AmbientLight _ambientLight;
     private List<LightSource> _lights = null;
+
+    public List<Box> get_box() {
+        return _box;
+    }
+
+    public void set_box(List<Box> _box) {
+        this._box = _box;
+    }
+
+    private  List<Box> _box;
 
 
     public AmbientLight getAmbientLight() {
@@ -38,6 +49,7 @@ public class Scene {
 
     public Scene(String _sceneName) {
         this._name = _sceneName;
+        _box=new LinkedList<Box>();
     }
 
     public Color getBackground() {
@@ -71,6 +83,12 @@ public class Scene {
     public void addGeometries(Intersectable... intersectables) {
         for (Intersectable i : intersectables) {
             _geometries.add(i);
+        }
+    }
+
+    public void addBox(Intersectable... intersectables) {
+        for (Intersectable i : intersectables) {
+            _box.add(new Box(i));//enter boxes to scene
         }
     }
 
