@@ -3,13 +3,10 @@
  */
 package unittests;
 
-import geometries.Plane;
-import geometries.Polygon;
+import geometries.*;
 import org.junit.Test;
 
 import elements.*;
-import geometries.Sphere;
-import geometries.Triangle;
 import primitives.*;
 import renderer.*;
 import scene.Scene;
@@ -289,7 +286,7 @@ public class ReflectionRefractionTests {
         scene.setDistance(1000);
         scene.setBackground(Color.BLACK);
         scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
-
+        Intersectable.set_actBoundingBox(true);
         scene.addGeometries( //
                 new Triangle(Color.BLACK, new Material(0.5, 0.5, 60), //
                         new Point3D(-150, 150, 115), new Point3D(150, 150, 135), new Point3D(75, -75, 150)), //
@@ -298,13 +295,8 @@ public class ReflectionRefractionTests {
                 new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), // )
                         30, new Point3D(60, -50, 50)));
 
-        scene.addBox(   new Triangle(Color.BLACK, new Material(0.5, 0.5, 60), //
-                        new Point3D(-150, 150, 115), new Point3D(150, 150, 135), new Point3D(75, -75, 150)), //
-                new Triangle(Color.BLACK, new Material(0.5, 0.5, 60), //
-                        new Point3D(-150, 150, 115), new Point3D(-70, -70, 140), new Point3D(75, -75, 150)), //
-                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), // )
-                        30, new Point3D(60, -50, 50)));
-              scene.addLights(new PointLight(new Color(700, 400, 400), //
+
+        scene.addLights(new PointLight(new Color(700, 400, 400), //
                 new Point3D(90, -80, 50 ), 1, 4E-5, 2E-7,4));
 
         ImageWriter imageWriter = new ImageWriter("shadow with transparency4", 200, 200, 600, 600);

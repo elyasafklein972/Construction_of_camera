@@ -1,17 +1,12 @@
 package unittests;
 
-import geometries.Sphere;
 import geometries.Triangle;
 import org.junit.Test;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.Assert.*;
-import static primitives.Util.isZero;
 
 /**
  * Unit tests for geometries.Triangle class
@@ -55,42 +50,42 @@ public class TriangleTest {
     @Test
     public void findIntersectionsTests() {
 
-        assertEquals("",t1.findIntersections(r1).size(),1);
+        assertEquals("",t1.getFindIntersections(r1).size(),1);
 
         try {
-            t1.findIntersections(r2).size();
+            t1.getFindIntersections(r2).size();
         }
         catch (NullPointerException e){
             System.out.println(e+ "r2 no Intersections with t1");
         }
 
         try {
-            t1.findIntersections(r3).size();
+            t1.getFindIntersections(r3).size();
     }
         catch (NullPointerException e){
             System.out.println("r3 no Intersections with t1");
         }
 
         try {
-           t1.findIntersections(r4).size();
+           t1.getFindIntersections(r4).size();
         }
         catch (NullPointerException e){
             System.out.println("r4 no Intersections with t1");
         }
      try{
-        t2.findIntersections(r1).size();
+        t2.getFindIntersections(r1).size();
      }
      catch (NullPointerException e){
          System.out.println("r1 no Intersections with t2");
      }
         try{
-            t2.findIntersections(r2).size();
+            t2.getFindIntersections(r2).size();
         }
         catch (NullPointerException e){
             System.out.println("r2 no Intersections with t2");
         }
                try{
-            t2.findIntersections(r3).size();
+            t2.getFindIntersections(r3).size();
         }
         catch (NullPointerException e){
             System.out.println("r3 no Intersections with t2");
@@ -98,7 +93,7 @@ public class TriangleTest {
 
         try{
 
-            assertEquals("",t2.findIntersections(r4).size(),1);
+            assertEquals("",t2.getFindIntersections(r4).size(),1);
 
         }
         catch (NullPointerException e){

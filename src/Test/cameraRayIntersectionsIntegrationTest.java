@@ -29,7 +29,7 @@ public class cameraRayIntersectionsIntegrationTest {
 
         for (int i=0;i<3;i++) {
             for (int j = 0; j < 3; j++) {
-                intersections = sphere.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                intersections = sphere.getFindIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
                 if (intersections != null)
                 count+=intersections.size();
             }
@@ -55,7 +55,7 @@ public class cameraRayIntersectionsIntegrationTest {
 
         for (int i=0;i<3;i++) {
             for (int j = 0; j < 3; j++) {
-                intersections = sphere.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                intersections = sphere.getFindIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
                 if (intersections != null)
                     count+=intersections.size();
             }
@@ -80,7 +80,7 @@ public class cameraRayIntersectionsIntegrationTest {
 
         for (int i=0;i<3;i++) {
             for (int j = 0; j < 3; j++) {
-                intersections = sphere.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                intersections = sphere.getFindIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
                 if (intersections != null)
                     count+=intersections.size();
             }
@@ -104,7 +104,7 @@ public class cameraRayIntersectionsIntegrationTest {
 
         for (int i=0;i<3;i++) {
             for (int j = 0; j < 3; j++) {
-                intersections = sphere.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                intersections = sphere.getFindIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
                 if (intersections != null)
                     count+=intersections.size();
             }
@@ -130,7 +130,7 @@ public class cameraRayIntersectionsIntegrationTest {
 
         for (int i=0;i<3;i++) {
             for (int j = 0; j < 3; j++) {
-                intersections = sphere.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                intersections = sphere.getFindIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
                 if (intersections != null)
                     count+=intersections.size();
             }
@@ -155,7 +155,7 @@ public class cameraRayIntersectionsIntegrationTest {
 
         for (int i=0;i<3;i++) {
             for (int j = 0; j < 3; j++) {
-                intersections = plane.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                intersections = plane.getFindIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
                 if (intersections != null)
                     count+=intersections.size();
             }
@@ -179,7 +179,7 @@ public class cameraRayIntersectionsIntegrationTest {
 
         for (int i=0;i<3;i++) {
             for (int j = 0; j < 3; j++) {
-                intersections = plane.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                intersections = plane.getFindIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
                 if (intersections != null)
                     count+=intersections.size();
             }
@@ -204,7 +204,7 @@ public class cameraRayIntersectionsIntegrationTest {
 
         for (int i=0;i<3;i++) {
             for (int j = 0; j < 3; j++) {
-                intersections = plane.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                intersections = plane.getFindIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
                 if (intersections != null)
                     count+=intersections.size();
             }
@@ -229,7 +229,7 @@ public class cameraRayIntersectionsIntegrationTest {
 
         for (int i=0;i<3;i++) {
             for (int j = 0; j < 3; j++) {
-                intersections = plane.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                intersections = plane.getFindIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
                 if (intersections != null)
                     count+=intersections.size();
             }
@@ -253,7 +253,7 @@ public class cameraRayIntersectionsIntegrationTest {
 
         for (int i=0;i<3;i++) {
             for (int j = 0; j < 3; j++) {
-                intersections = tri.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                intersections = tri.getFindIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
                 if (intersections != null)
                     count+=intersections.size();
             }
@@ -277,7 +277,7 @@ public class cameraRayIntersectionsIntegrationTest {
 
         for (int i=0;i<3;i++) {
             for (int j = 0; j < 3; j++) {
-                intersections = tri.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                intersections = tri.getFindIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
                 if (intersections != null)
                     count+=intersections.size();
             }
@@ -301,7 +301,7 @@ public class cameraRayIntersectionsIntegrationTest {
 
         for (int i=0;i<3;i++) {
             for (int j = 0; j < 3; j++) {
-                intersections = tri.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                intersections = tri.getFindIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
                 if (intersections != null)
                     count+=intersections.size();
             }
@@ -324,7 +324,7 @@ public class cameraRayIntersectionsIntegrationTest {
 
         for (int i=0;i<3;i++) {
             for (int j = 0; j < 3; j++) {
-                intersections = tri.findIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
+                intersections = tri.getFindIntersections(cam.constructRayThroughPixel(3, 3, j, i, 1, 3, 3));
                 if (intersections != null)
                     count+=intersections.size();
             }

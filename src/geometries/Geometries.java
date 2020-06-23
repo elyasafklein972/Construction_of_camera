@@ -9,11 +9,20 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Geometries implements Intersectable {
+public class Geometries extends Intersectable {
 
     private List<Intersectable> _geometries = new ArrayList<>();
-
+    public Geometries() {
+        this.box._max_X = Double.NEGATIVE_INFINITY;
+        this.box._min_X = Double.POSITIVE_INFINITY;
+        this.box._max_Y = Double.NEGATIVE_INFINITY;
+        this.box._min_Y = Double.POSITIVE_INFINITY;
+        this.box._max_Z = Double.NEGATIVE_INFINITY;
+        this.box._min_Z = Double.POSITIVE_INFINITY;
+        _geometries = new LinkedList<Intersectable>();
+    }
     public Geometries(Intersectable... _geometries) {
+        this();//default ctor
         add(_geometries);
     }
 
@@ -21,7 +30,22 @@ public class Geometries implements Intersectable {
 //        for (Intersectable geo : geometries) {
 //            _geometries.add(geo);
 //        }
-        _geometries.addAll(Arrays.asList(geometries));
+        for (Intersectable geo : geometries) {
+            _geometries.add(geo);
+        if (geo.box._max_X > this.box._max_X)
+            this.box._max_X = geo.box._max_X;
+        if (geo.box._min_X < this.box._min_X)
+            this.box._min_X = geo.box._min_X;
+        if (geo.box._max_Y > this.box._max_Y)
+            this.box._max_Y = geo.box._max_Y;
+        if (geo.box._min_Y < this.box._min_Y)
+            this.box._min_Y = geo.box._min_Y;
+        if (geo.box._max_Z > this.box._max_Z)
+            this.box._max_Z = geo.box._max_Z;
+        if (geo.box._min_Z < this.box._min_Z)
+            this.box._min_Z = geo.box._min_Z;
+    }
+    //    _geometries.addAll(Arrays.asList(geometries));
     }
 
     /**

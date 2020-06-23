@@ -11,7 +11,7 @@ import primitives.Vector;
  *
  * @author Bobby McFerrin don't worry be Happy
  */
-public abstract class Geometry implements Intersectable {
+public abstract class Geometry extends Intersectable {
 
     protected Color _emission;
     protected Material _material;

@@ -155,22 +155,9 @@ public class Render {
             threads[i] = new Thread(() -> {
                 Pixel pixel = new Pixel();
                 while (thePixel.nextPixel(pixel)) {
-                    boolean flag = false;
-                    Ray rays = camera.constructRayThroughPixel(nX, nY, pixel.col, pixel.row, dist, width, height);
-                    if(_scene.get_box().size()!=0)
-                    {
-                        for (Box j : _scene.get_box()) {
 
-                            if (j.isIntersectionWithBox(rays)) {
-                                    flag = true;
-                            }
-                        }
-                    }
-                    else {
-                        flag=true;
-                    }
-                        if(flag)
-                        {
+                    Ray rays = camera.constructRayThroughPixel(nX, nY, pixel.col, pixel.row, dist, width, height);
+
                             GeoPoint closestPoint = findClosestIntersection(rays);
                             if (closestPoint == null) {
                                 _imageWriter.writePixel(pixel.col, pixel.row, background);
@@ -178,7 +165,7 @@ public class Render {
                                 _imageWriter.writePixel(pixel.col, pixel.row, calcColor(closestPoint, rays).getColor());
                             }
                         }
-                    }
+
                 }
 
                 );
@@ -293,7 +280,7 @@ public class Render {
 
     //    Box box=new Box(_scene.getGeometries());//make new box from geometry
       //  if (box.contains(ray)) {//check the box
-            List<GeoPoint> intersections = _scene.getGeometries().findIntersections(ray);
+            List<GeoPoint> intersections = _scene.getGeometries().getFindIntersections(ray);
             if (intersections == null)
                 return null;
 
@@ -518,7 +505,7 @@ public class Render {
         Ray lightRay = new Ray(geopoint.getPoint(), lightDirection, n);
         Point3D pointGeo = geopoint.getPoint();
 
-        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(lightRay);
+        List<GeoPoint> intersections = _scene.getGeometries().getFindIntersections(lightRay);
         if (intersections == null) {
             return true;
         }
@@ -545,7 +532,7 @@ public class Render {
         epsVector.scale(epsVector.dotProduct(lightDirection) > 0 ? 2 : -2);
         geometryPoint.add(epsVector);
         Ray lightRay = new Ray(geometryPoint, lightDirection);
-        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(lightRay);
+        List<GeoPoint> intersections = _scene.getGeometries().getFindIntersections(lightRay);
 
         // Flat geometry cannot self intersect
         if (geopoint.getGeometry() instanceof FlatGeometry) {
@@ -563,7 +550,7 @@ public class Render {
         Ray lightRay = new Ray(geopoint.getPoint(), lightDirection, n);
         Point3D pointGeo = geopoint.getPoint();
 
-        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(lightRay);
+        List<GeoPoint> intersections = _scene.getGeometries().getFindIntersections(lightRay);
         if (intersections == null) {
             return 1d;
         }
@@ -585,7 +572,7 @@ public class Render {
         Ray lightRay = new Ray(geopoint.getPoint(), lightDirection, n);
         Point3D pointGeo = geopoint.getPoint();
 
-        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(lightRay);
+        List<GeoPoint> intersections = _scene.getGeometries().getFindIntersections(lightRay);
         if (intersections == null) {
             return true;
         }

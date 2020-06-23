@@ -28,6 +28,7 @@ public class Polygon extends FlatGeometry {
      */
     protected Plane _plane;
 
+
     /**
      * Polygon constructor based on vertices list. The list must be ordered by edge
      * path. The polygon must be convex.
@@ -88,6 +89,7 @@ public class Polygon extends FlatGeometry {
             edge2 = vertices[i].subtract(vertices[i - 1]);
             if (positive != (edge1.crossProduct(edge2).dotProduct(n) > 0))
                 throw new IllegalArgumentException("All vertices must be ordered and the polygon must be convex");
+
         }
     }
 
