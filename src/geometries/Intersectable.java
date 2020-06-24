@@ -3,6 +3,7 @@ package geometries;
 import primitives.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +18,6 @@ import java.util.List;
  */
 public abstract class Intersectable {
     private static boolean _actBoundingBox = false;
-
     public static void set_actBoundingBox(boolean _actBoundingBox) {
         Intersectable._actBoundingBox = _actBoundingBox;
     }
@@ -225,4 +225,5 @@ public abstract class Intersectable {
 
         return true;
     }
+
 }

@@ -1,7 +1,7 @@
 package geometries;
 
 import primitives.Point3D;
-import primitives.Ray;
+import primitives.*;
 
 import javax.print.DocFlavor;
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Geometries extends Intersectable {
+    private  List<Geometries> _geos=new ArrayList<>();
 
     private List<Intersectable> _geometries = new ArrayList<>();
     public Geometries() {
@@ -24,6 +25,11 @@ public class Geometries extends Intersectable {
     public Geometries(Intersectable... _geometries) {
         this();//default ctor
         add(_geometries);
+    }
+    public Geometries(Geometries... _geos) {
+
+        add(_geos);
+
     }
 
     public void add(Intersectable... geometries) {
@@ -48,6 +54,7 @@ public class Geometries extends Intersectable {
     //    _geometries.addAll(Arrays.asList(geometries));
     }
 
+
     /**
      * @param ray the ray that intersect the geometries
      * @return list of Point3D that intersect the osef
@@ -57,7 +64,7 @@ public class Geometries extends Intersectable {
         List<GeoPoint> intersections = null;
 
         for (Intersectable geo : _geometries) {
-            List<GeoPoint> tempIntersections = geo.findIntersections(ray, maxDistance);
+            List<GeoPoint> tempIntersections = geo.getFindIntersections(ray, maxDistance);
             if (tempIntersections != null) {
                 if (intersections == null)
                     intersections = new LinkedList<>();
@@ -72,5 +79,20 @@ public class Geometries extends Intersectable {
         for (Intersectable geo : _geometries) {
             _geometries.remove(geo);
         }
+    }
+    public List<GeoPoint> treeGeometries(Ray ray,double max){
+        if(this._geos.size()==0)
+        {
+            return this.getFindIntersections(ray,max);
+        }
+        else {
+            if (this.isIntersectionWithBox(ray)) {
+
+                for (Geometries g : _geos) {
+                    g.treeGeometries(ray, max);
+                }
+            }
+        }
+        return null;
     }
 }
