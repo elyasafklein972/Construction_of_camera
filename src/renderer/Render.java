@@ -39,7 +39,7 @@ public class Render {
    //     this._supersamplingRate = 0d;
     }
     // ...........
-    private int _threads = 1;
+    private int _threads =3 ;
     private final int SPARE_THREADS = 2;
     private boolean _print = false;
 
@@ -398,11 +398,7 @@ public class Render {
                             nv = n.dotProduct(v);
 
                             if (nl * nv > 0) {
-//                if (unshaded(lightSource, l, n, geoPoint)) {
-                                //                  ktr = 1d;
-                                //             } else {
-                                //                 ktr = 0d;
-                                //               }
+//
                                 ktr += transparency(lightSource, vec, n, geoPoint);
                             }
                         }
